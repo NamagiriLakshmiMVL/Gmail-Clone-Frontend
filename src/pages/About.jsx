@@ -1,14 +1,12 @@
 import React from 'react'
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+
 
 
 function About() {
     const navigate = useNavigate()
-    const user = useSelector((state) => state.userSlice.userDetails)
-    console.log(user)
-
+   
 
     return (
         <div >
@@ -18,7 +16,7 @@ function About() {
                     <span style={{ color: "#5f6368", fontFamily: "sans-serif", fontSize: "25px", marginTop: "8px" }}>Gmail</span>
                 </div>
                 <div className='home-topbutton'>
-                    <Button variant="outlined">Sign in</Button>
+                    <Button variant="outlined" onClick={navigate("/login")}>Sign in</Button>
                     <Button variant="contained" onClick={() => navigate("/creating-user/name")}>Create an account</Button>
                 </div>
             </div>

@@ -6,6 +6,7 @@ import CreateAccountDob from './pages/CreateAccountDob';
 import CreateAccountGmail from './pages/CreateAccountGmail';
 import CreateAccountPassword from './pages/CreateAccountPassword'
 import NavBar from './pages/Navbar';
+import Login from './pages/Login';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/creating-user/gmail" element={<CreateAccountGmail/>} />
           <Route path="/creating-user/password" element={<CreateAccountPassword/>} />
           <Route path='/gmail' element={<NavBar/>}/>
+          <Route path='/login' element={<Login/>}/>
 
 
         </Routes>

@@ -10,7 +10,7 @@ const userSlice = createSlice({
     reducers:{
         new_user:(state,action)=>{
            
-           let newUser = state.userDetails[action.payload[0]]=action.payload[1]
+           state.userDetails[action.payload[0]]=action.payload[1]
 
         }
     }

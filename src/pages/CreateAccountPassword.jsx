@@ -1,27 +1,28 @@
 import { Button, TextField } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
-import { useDispatch } from 'react-redux'
-import { new_user } from '../redux/userSlice'
-
-
+import axios from "axios"
+import { useSelector } from 'react-redux';
 
 function CreateAccountGmail() {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const [password, setPassword] = useState("")
 
-    const handleSubmit = (e) => {
+    const user = useSelector((state) => state.userSlice.userDetails)
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        const data = new FormData(e.target);
-        const password = data.get("password")
-
-       
-      
-        dispatch(new_user(["password",password]))
-        navigate("/gmail")
-
+        console.log("User", user)
+        const result = {
+            ...user,
+            password: password
+        }
+        axios.post("https://backend-jz6x.onrender.com/creating-user/password", result)
+            .then((res) => {
+                navigate("/gmail")
+                console.log(res.data)
+            })
+            .catch((err) => console.log(err))
     }
-   
 
     return (
         <div>
@@ -29,12 +30,14 @@ function CreateAccountGmail() {
                 <h1>Google</h1>
                 <h2>Create a Gmail Password</h2>
                 <h4>Enter your password</h4>
-                <TextField label="Create a Gmail Password" name='password' />
+                <TextField label="Create a Gmail Password" name='password' onChange={(e) => setPassword(e.target.value)} />
                 <br /><br />
 
 
-                <Button variant="contained" type='submit' >Next</Button>
+                <Button variant="contained" type='submit'  >Next</Button>
             </form>
+            <br />
+            {/* <Button variant="contained" onClick={() => handleGmail()} >Create Gmail</Button> */}
         </div>
     )
 }

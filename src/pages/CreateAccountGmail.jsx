@@ -17,7 +17,7 @@ function CreateAccountGmail() {
         }
         localStorage.setItem("user_details", JSON.stringify(newUserGmail))
         
-        dispatch(new_user(["gmail",gmail]))
+        dispatch(new_user(["email",gmail]))
         navigate("/creating-user/password")
     }
 
@@ -34,6 +34,9 @@ function CreateAccountGmail() {
 
                 <Button variant="contained" type='submit' >Next</Button>
             </form>
+
+          
+            
         </div>
     )
 }
