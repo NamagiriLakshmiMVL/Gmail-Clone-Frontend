@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import About from './pages/About';
+import CreateAccountName from './pages/CreateAccountName';
+import CreateAccountDob from './pages/CreateAccountDob';
+import CreateAccountGmail from './pages/CreateAccountGmail';
+import CreateAccountPassword from './pages/CreateAccountPassword'
+import NavBar from './pages/Navbar';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<About />} />
+          <Route path="/creating-user/name" element={<CreateAccountName/>} />
+          <Route path="/creating-user/dob" element={<CreateAccountDob/>} />
+          <Route path="/creating-user/gmail" element={<CreateAccountGmail/>} />
+          <Route path="/creating-user/password" element={<CreateAccountPassword/>} />
+          <Route path='/gmail' element={<NavBar/>}/>
+
+
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
