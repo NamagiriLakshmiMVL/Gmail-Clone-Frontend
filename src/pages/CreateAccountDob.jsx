@@ -42,7 +42,7 @@ function CreatingAccountDob() {
         dispatch(new_user(["month",month]))
         dispatch(new_user(["year",year]))
         dispatch(new_user(["gender",gender]))
-        localStorage.setItem("user_details", JSON.stringify(newUserdob))
+       
 
         // console.log(newUserdob)
         navigate("/creating-user/gmail")

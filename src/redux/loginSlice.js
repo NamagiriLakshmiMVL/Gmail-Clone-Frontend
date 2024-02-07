@@ -10,8 +10,9 @@ const loginSlice = createSlice({
     reducers:{
         login_user:(state,action)=>{
            
+          
           state.loginDetails.push(action.payload)
-
+        
         }
     }
 })

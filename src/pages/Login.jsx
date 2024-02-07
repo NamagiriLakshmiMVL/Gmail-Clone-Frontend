@@ -17,14 +17,21 @@ function Login() {
     const handleSubmit = async(e) => {
         e.preventDefault()
         const data = new FormData(e.target);
+      
         const email = data.get("email")
         setEmail(email)
+        const emails = {
+            email,
+        }
         const password = data.get("password")
         setPassword(password)
+       
         const result = {
             email: email,
             password: password
         }
+        localStorage.setItem("user_details", JSON.stringify(emails))
+        
         axios.post(`${API}/creating-user/login`, result)
             .then((res) => {
                 setSample(res.data)
