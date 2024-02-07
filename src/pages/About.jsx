@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router-dom';
 function About() {
     const navigate = useNavigate()
    
-
+   
+      
     return (
         <div >
             <div className='navbar-home'>

@@ -1,33 +1,41 @@
 import { Button, TextField } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { API } from '../API'
+import { useDispatch } from 'react-redux'
 
+import { login_user } from '../redux/loginSlice'
 
 
 function Login() {
-   
+    const [sample, setSample] = useState([])
+    const [email,setEmail] = useState("")
+    const [password,setPassword] = useState("")
+    const dispatch = useDispatch()
     const navigate = useNavigate()
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault()
         const data = new FormData(e.target);
         const email = data.get("email")
+        setEmail(email)
         const password = data.get("password")
-
+        setPassword(password)
         const result = {
             email: email,
             password: password
         }
-
-
         axios.post(`${API}/creating-user/login`, result)
             .then((res) => {
-                ((res.data.email === result.email)&&(res.data.password===result.password)) ? navigate("/gmail") : alert("Invalid Credentials")
+                setSample(res.data)
             })
             .catch((err) => console.log(err))
-    }
 
+    }
+    ((sample.email === email) && (sample.password === password)) ? navigate("/gmail") : console.log("error")
+    dispatch(login_user(sample))
+
+    //console.log(sample)
     return (
         <div>
             <form onSubmit={(e) => handleSubmit(e)}>

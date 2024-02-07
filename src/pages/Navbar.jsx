@@ -9,6 +9,7 @@ import DataTable from "./DataTable"
 import MenuIcon from '@mui/icons-material/Menu';
 import { Avatar } from '@mui/material';
 import { deepOrange } from '@mui/material/colors';
+import DisplayMsg from './DisplayMsg';
 
 function Navbar() {
     const Search = styled('div')(({ theme }) => ({
@@ -84,7 +85,7 @@ function Navbar() {
                 <SideBar/>
                </div>
                <div style={{marginLeft:"200px",marginTop:"50px"}}>
-               <DataTable />
+               <DisplayMsg/>
                </div>
 
                
