@@ -20,7 +20,7 @@ function App() {
           <Route path="/creating-user/gmail" element={<CreateAccountGmail/>} />
           <Route path="/creating-user/password" element={<CreateAccountPassword/>} />
           <Route path='/gmail' element={<NavBar/>}/>
-          <Route path='/login' element={<Login/>}/>
+          <Route path='creating-user/login' element={<Login/>}/>
 
 
         </Routes>

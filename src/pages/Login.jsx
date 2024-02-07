@@ -1,26 +1,34 @@
 import { Button, TextField } from '@mui/material'
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
+import { API } from '../API'
 
 
 
-function Login() {
-    const [login, setLogin] = useState({})
+function Login(){
     const navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault()
         const data = new FormData(e.target);
-        const username = data.get("username")
+        const email = data.get("email")
         const password = data.get("password")
 
         const result = {
-            username:username,
-            password:password
+            email: email,
+            password: password
         }
-        
 
-        navigate("/creating-user/dob")
-        console.log(login)
+        axios.post(`${API}/creating-user/login`, result)
+            .then((res) => {
+                console.log(res.data)
+                navigate("/gmail")
+            
+            })
+            .catch((err)=>console.log(err))
+
+
+       
     }
 
     return (

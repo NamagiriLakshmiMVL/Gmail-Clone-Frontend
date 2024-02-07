@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { useSelector } from 'react-redux';
+import { API } from '../API';
 
 function CreateAccountGmail() {
     const navigate = useNavigate()
@@ -16,7 +17,7 @@ function CreateAccountGmail() {
             ...user,
             password: password
         }
-        axios.post("https://backend-jz6x.onrender.com/creating-user/password", result)
+        axios.post(`${API}creating-user/password`, result)
             .then((res) => {
                 navigate("/gmail")
                 console.log(res.data)
