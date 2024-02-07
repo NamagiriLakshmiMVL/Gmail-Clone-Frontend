@@ -9,7 +9,7 @@ function DisplayMsg() {
     const items = JSON.parse(localStorage.getItem('email'));
    
     axios.post(`${API}/gmail//getting-msg`,items)
-    .then((res)=>console.log(res.data))
+    .then((res)=>console.log(res))
   
 
     return (
