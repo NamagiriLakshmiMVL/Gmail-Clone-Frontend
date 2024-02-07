@@ -6,7 +6,8 @@ import { API } from '../API'
 
 
 
-function Login(){
+function Login() {
+   
     const navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -19,16 +20,12 @@ function Login(){
             password: password
         }
 
+
         axios.post(`${API}/creating-user/login`, result)
             .then((res) => {
-                console.log(res.data)
-                navigate("/gmail")
-            
+                ((res.data.email === result.email)&&(res.data.password===result.password)) ? navigate("/gmail") : alert("Invalid Credentials")
             })
-            .catch((err)=>console.log(err))
-
-
-       
+            .catch((err) => console.log(err))
     }
 
     return (
