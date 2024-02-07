@@ -30,7 +30,8 @@ function Login() {
             email: email,
             password: password
         }
-        localStorage.setItem("user_details", JSON.stringify(emails))
+        localStorage.setItem("email", JSON.stringify(email))
+        
         
         axios.post(`${API}/creating-user/login`, result)
             .then((res) => {
