@@ -43,6 +43,7 @@ export default function SideBar({sendhandler=()=>{}}) {
         const reqObject = {
             from: e.target.from.value,
             to: e.target.to.value,
+            subject:e.target.subject.value,
             message: e.target.message.value
 
         }
@@ -71,7 +72,7 @@ export default function SideBar({sendhandler=()=>{}}) {
                                 <ListItemText primary="Inbox" />
                             </ListItemButton>
                         </ListItem>
-                        <ListItemButton onClick={()=>navigate("/gmail/getting-sent")}>
+                        <ListItemButton onClick={()=>navigate("/getting-sent")}>
                             <ListItemIcon>
                                 <SendIcon />
                             </ListItemIcon>
@@ -139,7 +140,7 @@ export default function SideBar({sendhandler=()=>{}}) {
                         <input type="text" name="to" />
                         <br /><br/>
                         <label>Subject:</label>
-                        <input type="text" name="to" />
+                        <input type="text" name="subject" />
                         <br /><br/>
                         <label>Message:</label>
                         <input type="text" name="message" />

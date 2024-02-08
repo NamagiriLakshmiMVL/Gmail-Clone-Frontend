@@ -6,6 +6,7 @@ import { Checkbox, Tooltip, Typography } from '@mui/material';
 import StarBorder from '@mui/icons-material/StarBorder';
 import ArrowBackTwoToneIcon from '@mui/icons-material/ArrowBackTwoTone';
 
+
 function DisplayMsg({send}) {
     const [message, setMessage] = useState([])
     const items = JSON.parse(localStorage.getItem('email'));
@@ -16,7 +17,7 @@ function DisplayMsg({send}) {
         console.log("useEfect called")
         axios.post(`${API}/gmail/getting-msg`, result)
             .then((res) => setMessage(res.data))
-    }, [send],[result])
+    }, [send])
 
    
     return (

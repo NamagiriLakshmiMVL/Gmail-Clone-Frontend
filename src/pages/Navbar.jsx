@@ -3,9 +3,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SideBar from './SideBar';
-
-
-
 import MenuIcon from '@mui/icons-material/Menu';
 import { Avatar } from '@mui/material';
 import { deepOrange } from '@mui/material/colors';
@@ -52,10 +49,10 @@ function Navbar() {
         },
     }));
 
-    const [handler,setHandler] = React.useState(false)
-    const sendhandler = () =>{
-        console.log("sendhandler")
-        setHandler(prev=>!prev)
+    const [handler, setHandler] = React.useState(false)
+    const sendhandler = () => {
+        console.log("navbar called")
+        setHandler(prev => !prev)
     }
     return (
         <div>
@@ -87,19 +84,13 @@ function Navbar() {
 
             <div className='sidebar-root'>
 
-               <div>
-                <SideBar sendhandler={sendhandler}/>
-               </div>
-               <div style={{marginLeft:"50px",marginTop:"50px"}}>
-               <DisplayMsg send={handler}/>
-               </div>
-
-               
-
+                <div>
+                    <SideBar sendhandler={sendhandler}/>
+                </div>
+                <div style={{ marginLeft: "50px", marginTop: "50px" }}>
+                    <DisplayMsg send={handler} />
+                </div>
             </div>
-
-
-
         </div>
     )
 }
