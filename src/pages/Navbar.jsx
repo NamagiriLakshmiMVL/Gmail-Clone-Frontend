@@ -51,6 +51,12 @@ function Navbar() {
             },
         },
     }));
+
+    const [handler,setHandler] = React.useState(false)
+    const sendhandler = () =>{
+        console.log("sendhandler")
+        setHandler(prev=>!prev)
+    }
     return (
         <div>
             <div className='main-root'>
@@ -82,10 +88,10 @@ function Navbar() {
             <div className='sidebar-root'>
 
                <div>
-                <SideBar/>
+                <SideBar sendhandler={sendhandler}/>
                </div>
-               <div style={{marginLeft:"200px",marginTop:"50px"}}>
-               <DisplayMsg/>
+               <div style={{marginLeft:"50px",marginTop:"50px"}}>
+               <DisplayMsg send={handler}/>
                </div>
 
                
