@@ -36,6 +36,7 @@ export default function SideBar({sendhandler=()=>{}}) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [open, setOpen] = useState(false);
+   
 
     const from = JSON.parse(localStorage.getItem("email"))
     const handleSubmit = (e) => {
@@ -65,7 +66,7 @@ export default function SideBar({sendhandler=()=>{}}) {
                             <ListItemText primary="Compose" />
                         </ListItemButton>
                         <ListItem disablePadding>
-                            <ListItemButton>
+                            <ListItemButton onClick={()=>navigate("/gmail/display-msg")}>
                                 <ListItemIcon>
                                     <InboxIcon />
                                 </ListItemIcon>
@@ -84,7 +85,7 @@ export default function SideBar({sendhandler=()=>{}}) {
                             </ListItemIcon>
                             <ListItemText primary="Starred" />
                         </ListItemButton>
-                        <ListItemButton>
+                        <ListItemButton onClick={()=>navigate("/gmail/display-msg")}>
                             <ListItemIcon>
                                 < MailIcon />
                             </ListItemIcon>

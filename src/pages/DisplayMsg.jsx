@@ -14,7 +14,6 @@ function DisplayMsg({ send }) {
     const dispatch = useDispatch()
     const [message, setMessage] = useState([])
     const [remove, setRemove] = useState(false);
-    const [star, setStar] = useState(false)
     const items = JSON.parse(localStorage.getItem('email'));
     const result = {
         items
