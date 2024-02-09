@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import { Star } from './pages/Star';
 import { Sent } from './pages/Sent';
 import DisplayMsg from './pages/DisplayMsg';
+import {Trash} from "./pages/Trash"
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path='/gmail/getting-star' element={<Star />} />
           <Route path='/gmail/getting-msg' element={<Sent />} />
           <Route path='/gmail/display-msg' element={<DisplayMsg />} />
+          <Route path='/info/getting-delete' element={<Trash/>} />
 
         </Routes>
 

@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 
 
 function DisplayMsg({ send }) {
-const dispatch = useDispatch()
+    const dispatch = useDispatch()
     const [message, setMessage] = useState([])
     const [remove, setRemove] = useState(false);
     const [star, setStar] = useState(false)
@@ -25,17 +25,24 @@ const dispatch = useDispatch()
             .then((res) => setMessage(res.data))
     }, [send, remove])
 
+
+
     const handleDelete = async (id) => {
         const newdata = {
             id
         }
+        await axios.post(`${API}/info/delete`, id)
+            .then((res) => console.log(res.data))
+
+
         await axios.post(`${API}/gmail/deleting-msg`, newdata)
             .then((res) => alert(res.data))
         setRemove(prev => !prev);
     }
 
     const handleStar = async (id) => {
-      dispatch(star_message(id))
+        dispatch(star_message(id))
+
     }
     return (
         <div>
@@ -50,7 +57,7 @@ const dispatch = useDispatch()
                                 <Typography style={{ width: 200 }}>{details.from}</Typography>
                                 <Typography style={{ width: 200 }}>{details.subject}</Typography>
                                 <Typography style={{ width: 200 }}>{details.message}</Typography>
-                                <Button onClick={() => handleDelete(details._id)}><DeleteIcon color='inherit' /></Button>
+                                <Button onClick={() => handleDelete(details)}><DeleteIcon color='inherit' /></Button>
                             </table>
                         </Tooltip>
                     </div>

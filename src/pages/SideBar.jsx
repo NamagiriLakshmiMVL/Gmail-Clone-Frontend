@@ -78,8 +78,8 @@ export default function SideBar({sendhandler=()=>{}}) {
                             </ListItemIcon>
                             <ListItemText primary="Sent"  />
                         </ListItemButton>
-                        <ListItemButton>
-                            <ListItemIcon onClick={()=>navigate("/gmail/getting-star")}>
+                        <ListItemButton onClick={()=>navigate("/gmail/getting-star")}>
+                            <ListItemIcon >
                                 <StarBorder />
                             </ListItemIcon>
                             <ListItemText primary="Starred" />
@@ -107,7 +107,7 @@ export default function SideBar({sendhandler=()=>{}}) {
                 <nav aria-label="secondary mailbox folders">
                     <List>
                         <ListItem disablePadding>
-                            <ListItemButton>
+                            <ListItemButton onClick={()=>navigate("/info/getting-delete")}>
                                 <ListItemText primary="Trash" />
                             </ListItemButton>
                         </ListItem>
