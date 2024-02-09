@@ -11,19 +11,20 @@ import StarBorder from '@mui/icons-material/StarBorder';
 
 export function Trash() {
     const [sent, setSent] = useState([])
+    const [remove, setRemove] = useState(false);
     
     useEffect(() => {
         axios.get(`${API}/info/getting-delete`)
             .then((res) => setSent(res.data))
-    },[])
+    },[remove])
     const handleDelete = async (id) => {
         const newdata = {
             id
         }
        
-        await axios.post(`${API}/gmail/delete-delete`, newdata)
+        await axios.post(`${API}/info/delete-delete`, newdata)
             .then((res) => alert(res.data))
-       
+            setRemove(prev => !prev);
     }
 
     return (
