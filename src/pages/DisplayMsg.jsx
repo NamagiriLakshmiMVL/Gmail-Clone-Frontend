@@ -6,10 +6,12 @@ import { Button, Checkbox, Tooltip, Typography } from '@mui/material';
 import StarBorder from '@mui/icons-material/StarBorder';
 import ArrowBackTwoToneIcon from '@mui/icons-material/ArrowBackTwoTone';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import { star_message } from '../redux/starSlice';
+import { useDispatch } from 'react-redux';
 
 
 function DisplayMsg({ send }) {
-
+const dispatch = useDispatch()
     const [message, setMessage] = useState([])
     const [remove, setRemove] = useState(false);
     const [star, setStar] = useState(false)
@@ -33,7 +35,7 @@ function DisplayMsg({ send }) {
     }
 
     const handleStar = async (id) => {
-      
+      dispatch(star_message(id))
     }
     return (
         <div>
