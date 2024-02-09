@@ -72,14 +72,14 @@ export default function SideBar({sendhandler=()=>{}}) {
                                 <ListItemText primary="Inbox" />
                             </ListItemButton>
                         </ListItem>
-                        <ListItemButton onClick={()=>navigate("/gmail/getting-sent")}>
+                        <ListItemButton onClick={()=>navigate("/gmail/getting-msg")}>
                             <ListItemIcon>
                                 <SendIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Sent" />
+                            <ListItemText primary="Sent"  />
                         </ListItemButton>
                         <ListItemButton>
-                            <ListItemIcon>
+                            <ListItemIcon onClick={()=>navigate("/gmail/getting-star")}>
                                 <StarBorder />
                             </ListItemIcon>
                             <ListItemText primary="Starred" />

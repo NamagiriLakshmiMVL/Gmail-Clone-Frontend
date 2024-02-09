@@ -8,6 +8,7 @@ import CreateAccountPassword from './pages/CreateAccountPassword'
 import NavBar from './pages/Navbar';
 import Login from './pages/Login';
 import { Star } from './pages/Star';
+import { Sent } from './pages/Sent';
 import DisplayMsg from './pages/DisplayMsg';
 
 
@@ -23,11 +24,12 @@ function App() {
           <Route path="/creating-user/password" element={<CreateAccountPassword />} />
           <Route path='/gmail' element={<NavBar />} />
           <Route path='/creating-user/login' element={<Login />} />
-          <Route path='/gmail/getting-sent' element={<Star />} />
-          <Route path='/gmail/display-msg' element={<DisplayMsg/>}/>
+          <Route path='/gmail/getting-star' element={<Star />} />
+          <Route path='/gmail/getting-msg' element={<Sent />} />
+          <Route path='/gmail/display-msg' element={<DisplayMsg />} />
 
         </Routes>
-       
+
       </BrowserRouter>
     </div>
   );

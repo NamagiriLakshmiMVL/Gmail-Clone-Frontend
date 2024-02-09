@@ -18,14 +18,7 @@ export function Star() {
     useEffect(()=>{
         axios.post(`${API}/gmail/getting-star`,result)
         .then((res)=>setSent(res.data))
-    })
-
-    console.log(sent)
-
-
-
-   
-
+    },[result])
 
     return (
         <div>
