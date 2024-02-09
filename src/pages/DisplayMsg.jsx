@@ -5,10 +5,14 @@ import DeleteIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import { Button, Checkbox, Tooltip, Typography } from '@mui/material';
 import StarBorder from '@mui/icons-material/StarBorder';
 import ArrowBackTwoToneIcon from '@mui/icons-material/ArrowBackTwoTone';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 
 function DisplayMsg({ send }) {
+
     const [message, setMessage] = useState([])
+    const [remove, setRemove] = useState(false);
+    const [star, setStar] = useState(false)
     const items = JSON.parse(localStorage.getItem('email'));
     const result = {
         items
@@ -17,14 +21,19 @@ function DisplayMsg({ send }) {
         console.log("useEfect called")
         axios.post(`${API}/gmail/getting-msg`, result)
             .then((res) => setMessage(res.data))
-    }, [send])
+    }, [send, remove])
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
         const newdata = {
             id
         }
-        axios.post(`${API}/gmail/deleting-msg`, newdata)
+        await axios.post(`${API}/gmail/deleting-msg`, newdata)
             .then((res) => alert(res.data))
+        setRemove(prev => !prev);
+    }
+
+    const handleStar = async (id) => {
+      
     }
     return (
         <div>
@@ -33,9 +42,9 @@ function DisplayMsg({ send }) {
                 return (
                     <div className='displaymsg-root'>
                         <Tooltip title={details.message}>
-                            <table className="displaymsg" onClick={() => console.log(details._id)}>
+                            <table className="displaymsg">
                                 <Checkbox size='small' />
-                                <StarBorder fontSize='small' style={{ marginRight: 10 }} />
+                                <Button onClick={() => handleStar(details._id)}> <StarBorderIcon /></Button>
                                 <Typography style={{ width: 200 }}>{details.from}</Typography>
                                 <Typography style={{ width: 200 }}>{details.subject}</Typography>
                                 <Typography style={{ width: 200 }}>{details.message}</Typography>

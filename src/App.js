@@ -8,6 +8,7 @@ import CreateAccountPassword from './pages/CreateAccountPassword'
 import NavBar from './pages/Navbar';
 import Login from './pages/Login';
 import { Sent } from './pages/Sent';
+import DisplayMsg from './pages/DisplayMsg';
 
 
 function App() {
@@ -21,9 +22,9 @@ function App() {
           <Route path="/creating-user/gmail" element={<CreateAccountGmail />} />
           <Route path="/creating-user/password" element={<CreateAccountPassword />} />
           <Route path='/gmail' element={<NavBar />} />
-          <Route path='creating-user/login' element={<Login />} />
-          <Route path='/getting-sent' element={<Sent />} />
-
+          <Route path='/creating-user/login' element={<Login />} />
+          <Route path='/gmail/getting-sent' element={<Sent />} />
+          <Route path='/gmail/display-msg' element={<DisplayMsg/>}/>
 
         </Routes>
        

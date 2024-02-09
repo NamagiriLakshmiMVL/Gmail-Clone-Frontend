@@ -84,9 +84,9 @@ function Navbar() {
 
             <div className='sidebar-root'>
 
-                <div>
+                <>
                     <SideBar sendhandler={sendhandler}/>
-                </div>
+                </>
                 <div style={{ marginLeft: "50px", marginTop: "50px" }}>
                     <DisplayMsg send={handler} />
                 </div>

@@ -20,9 +20,7 @@ function Login() {
       
         const email = data.get("email")
         setEmail(email)
-        const emails = {
-            email,
-        }
+       
         const password = data.get("password")
         setPassword(password)
        
@@ -43,7 +41,6 @@ function Login() {
     ((sample.email === email) && (sample.password === password)) ? navigate("/gmail") : console.log("error")
     dispatch(login_user(sample))
 
-    //console.log(sample)
     return (
         <div>
             <form onSubmit={(e) => handleSubmit(e)}>
