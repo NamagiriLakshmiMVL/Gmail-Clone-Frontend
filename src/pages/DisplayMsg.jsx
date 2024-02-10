@@ -8,12 +8,14 @@ import ArrowBackTwoToneIcon from '@mui/icons-material/ArrowBackTwoTone';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { star_message } from '../redux/starSlice';
 import { useDispatch } from 'react-redux';
+import StarIcon from '@mui/icons-material/Star';
 
 
 function DisplayMsg({ send }) {
     const dispatch = useDispatch()
     const [message, setMessage] = useState([])
     const [remove, setRemove] = useState(false);
+    const [star, setStar] = useState([])
     const items = JSON.parse(localStorage.getItem('email'));
     const result = {
         items
@@ -41,8 +43,11 @@ function DisplayMsg({ send }) {
 
     const handleStar = async (id) => {
         dispatch(star_message(id))
+        console.log(id)
+        setStar(prev => [...prev,id])
 
     }
+    console.log(star)
     return (
         <div>
             <ArrowBackTwoToneIcon />
@@ -52,7 +57,7 @@ function DisplayMsg({ send }) {
                         <Tooltip title={details.message}>
                             <table className="displaymsg">
                                 <Checkbox size='small' />
-                                <Button onClick={() => handleStar(details._id)}> <StarBorderIcon /></Button>
+                                <Button onClick={() => handleStar(details._id)}> {star.includes(details._id) === details._id ? <StarIcon /> : <StarBorderIcon />}</Button>
                                 <Typography style={{ width: 200 }}>{details.from}</Typography>
                                 <Typography style={{ width: 200 }}>{details.subject}</Typography>
                                 <Typography style={{ width: 200 }}>{details.message}</Typography>

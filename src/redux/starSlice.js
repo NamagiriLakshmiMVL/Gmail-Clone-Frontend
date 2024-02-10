@@ -11,7 +11,7 @@ const starSlice = createSlice(
         reducers:{
             star_message:(state,action)=>{
                 state.starMessage.push(action.payload)
-                console.log(action.payload)
+                //console.log(action.payload)
             }
         }
     }
