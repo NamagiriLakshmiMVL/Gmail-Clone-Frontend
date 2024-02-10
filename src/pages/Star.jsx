@@ -14,12 +14,13 @@ export function Star() {
     const result = {
         id
     }
+
     
     useEffect(()=>{
         axios.post(`${API}/gmail/getting-star`,result)
         .then((res)=>setSent(res.data))
-    },[result])
-
+    },[])
+    console.log(sent)
     return (
         <div>
             

@@ -9,6 +9,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { star_message } from '../redux/starSlice';
 import { useDispatch } from 'react-redux';
 import StarIcon from '@mui/icons-material/Star';
+import { Sample } from './Sample';
 
 
 function DisplayMsg({ send }) {
@@ -44,8 +45,11 @@ function DisplayMsg({ send }) {
     const handleStar = async (id) => {
         dispatch(star_message(id))
         console.log(id)
-        setStar(prev => [...prev,id])
-
+        if(star.includes(id)){
+            setStar(prev => prev.filter(ele => ele !==id))
+        } else {
+        setStar(prev => [...prev, id])
+        }
     }
     console.log(star)
     return (
@@ -57,7 +61,8 @@ function DisplayMsg({ send }) {
                         <Tooltip title={details.message}>
                             <table className="displaymsg">
                                 <Checkbox size='small' />
-                                <Button onClick={() => handleStar(details._id)}> {star.includes(details._id) === details._id ? <StarIcon /> : <StarBorderIcon />}</Button>
+                                {console.log(star,details,star.includes(details._id))}
+                                <Button onClick={() => handleStar(details._id)}> {star.includes(details._id) ? <StarIcon /> : <StarBorderIcon />}</Button>
                                 <Typography style={{ width: 200 }}>{details.from}</Typography>
                                 <Typography style={{ width: 200 }}>{details.subject}</Typography>
                                 <Typography style={{ width: 200 }}>{details.message}</Typography>
