@@ -68,7 +68,10 @@ export default function SideBar({ sendhandler = () => { } }) {
                             <ListItemText primary="Compose" />
                         </ListItemButton>
                         <ListItem disablePadding>
-                            <ListItemButton onClick={()=>navigate("/gmail/display-msg")}>
+                            <ListItemButton onClick={()=> {
+                                // navigate("/gmail/display-msg")
+                                localStorage.setItem("path","inbox")
+                            }}>
                                 <ListItemIcon>
                                     <InboxIcon />
                                 </ListItemIcon>
