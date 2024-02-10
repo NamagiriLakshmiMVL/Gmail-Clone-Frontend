@@ -19,14 +19,16 @@ function App() {
   const val = localStorage.getItem("email")
   return (
     <>
-    
-       <TopBar/>
+
+      {val == null && <TopBar />}
 
 
       <div style={{ display: "flex", marginBottom: "20px" }}>
         <BrowserRouter>
-          <NavBar />
+        
+        {val != null &&  <NavBar />}
           <Routes>
+         
             <Route path="/" element={<About />} />
             <Route path="/creating-user/name" element={<CreateAccountName />} />
             <Route path="/creating-user/dob" element={<CreateAccountDob />} />
@@ -41,6 +43,7 @@ function App() {
           </Routes>
 
         </BrowserRouter>
+       
       </div>
     </>
   );
