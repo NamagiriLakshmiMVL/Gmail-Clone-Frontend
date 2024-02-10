@@ -18,6 +18,7 @@ import axios from "axios";
 import CloseIcon from '@mui/icons-material/Close';
 import { API } from '../API'
 import { useNavigate } from 'react-router-dom';
+import { TextField } from '@mui/material';
 const style = {
     position: 'absolute',
     top: '50%',
@@ -33,7 +34,7 @@ const style = {
 
 export default function SideBar({ sendhandler = () => { } }) {
     const navigate = useNavigate()
-    
+
     const handleOpen = () => {
         setOpen(true)
     };
@@ -43,11 +44,13 @@ export default function SideBar({ sendhandler = () => { } }) {
     const from = JSON.parse(localStorage.getItem("email"))
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        const data = new FormData(e.target)
         const reqObject = {
-            from: e.target.from.value,
-            to: e.target.to.value,
-            subject: e.target.subject.value,
-            message: e.target.message.value
+            from: data.get("from"),
+            to: data.get("to"),
+            subject: data.get("subject"),
+            message: data.get("message")
 
         }
         axios.post(`${API}/gmail/sent`, reqObject)
@@ -68,26 +71,26 @@ export default function SideBar({ sendhandler = () => { } }) {
                             <ListItemText primary="Compose" />
                         </ListItemButton>
                         <ListItem disablePadding>
-                            <ListItemButton onClick={()=>navigate("/gmail/display-msg")}>
+                            <ListItemButton onClick={() => navigate("/gmail/display-msg")}>
                                 <ListItemIcon>
                                     <InboxIcon />
                                 </ListItemIcon>
                                 <ListItemText primary="Inbox" />
                             </ListItemButton>
                         </ListItem>
-                        <ListItemButton onClick={()=>navigate("/gmail/getting-msg")}>
+                        <ListItemButton onClick={() => navigate("/gmail/getting-msg")}>
                             <ListItemIcon>
                                 <SendIcon />
                             </ListItemIcon>
                             <ListItemText primary="Sent" />
                         </ListItemButton>
-                        <ListItemButton onClick={()=>navigate("/gmail/getting-star")} >
+                        <ListItemButton onClick={() => navigate("/gmail/getting-star")} >
                             <ListItemIcon >
                                 <StarBorder />
                             </ListItemIcon>
                             <ListItemText primary="Starred" />
                         </ListItemButton>
-                        <ListItemButton onClick={()=>navigate("/gmail/display-msg")}>
+                        <ListItemButton onClick={() => navigate("/gmail/display-msg")}>
                             <ListItemIcon>
                                 < MailIcon />
                             </ListItemIcon>
@@ -110,8 +113,8 @@ export default function SideBar({ sendhandler = () => { } }) {
                 <nav aria-label="secondary mailbox folders">
                     <List>
                         <ListItem disablePadding>
-                            <ListItemButton onClick={()=>navigate("/info/getting-delete")} >
-                               
+                            <ListItemButton onClick={() => navigate("/info/getting-delete")} >
+
                                 <ListItemText primary="Trash" />
                             </ListItemButton>
                         </ListItem>
@@ -136,18 +139,14 @@ export default function SideBar({ sendhandler = () => { } }) {
                             <h2>New Message</h2>
                             <CloseIcon style={{ cursor: "pointer" }} onClick={() => setOpen(false)} />
                         </div>
-
-                        <label>from:</label>
-                        <input type="text" name="from" value={from} />
+                        <TextField label="From" name='from' value={from} />
                         <br /><br />
-                        <label>To:</label>
-                        <input type="text" name="to" />
+                        <TextField label="To" name='to' />
                         <br /><br />
-                        <label>Subject:</label>
-                        <input type="text" name="subject" />
+                        <TextField label="Subject" name='subject' />
                         <br /><br />
-                        <label>Message:</label>
-                        <input type="text" name="message" />
+                        
+                        <TextField label="Message" name='message' />
                         <br /><br />
 
 

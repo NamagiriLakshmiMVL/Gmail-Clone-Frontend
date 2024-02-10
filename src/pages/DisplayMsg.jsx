@@ -9,8 +9,6 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { star_message } from '../redux/starSlice';
 import { useDispatch } from 'react-redux';
 import StarIcon from '@mui/icons-material/Star';
-import { Sample } from './Sample';
-
 
 function DisplayMsg({ send }) {
     const dispatch = useDispatch()
@@ -18,9 +16,7 @@ function DisplayMsg({ send }) {
     const [remove, setRemove] = useState(false);
     const [star, setStar] = useState([])
     const items = JSON.parse(localStorage.getItem('email'));
-    const result = {
-        items
-    }
+    const result = {items}
     useEffect(() => {
         console.log("useEfect called")
         axios.post(`${API}/gmail/getting-msg`, result)

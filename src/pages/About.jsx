@@ -8,7 +8,7 @@ function About() {
     const navigate = useNavigate()
    
    
-      
+      localStorage.setItem("email",null)
     return (
         <div >
             <div className='navbar-home'>

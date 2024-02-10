@@ -20,6 +20,8 @@ export function Star() {
         axios.post(`${API}/gmail/getting-star`,result)
         .then((res)=>setSent(res.data))
     },[])
+
+   
     console.log(sent)
     return (
         <div>
@@ -35,7 +37,8 @@ export function Star() {
                                     <Typography style={{ width: 200 }}>{val.to}</Typography>
                                     <Typography style={{ width: 200 }}>{val.subject}</Typography>
                                     <Typography style={{ width: 200 }}>{val.message}</Typography>
-                                    <DeleteOutlineTwoToneIcon />
+                                   
+
                                 </table>
                             </Tooltip>
 
