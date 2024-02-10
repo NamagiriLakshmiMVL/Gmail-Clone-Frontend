@@ -1,17 +1,16 @@
 import React from 'react';
-import { useState } from 'react';
-import { Sent } from './Sent'
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SideBar from './SideBar';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Avatar, Button } from '@mui/material';
+import { Avatar } from '@mui/material';
 import { deepOrange } from '@mui/material/colors';
 import DisplayMsg from './DisplayMsg';
 
+
 function Navbar() {
-    const [temp, setTemp] = useState(true)
+ 
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
         borderRadius: "20px",
@@ -57,6 +56,8 @@ function Navbar() {
         console.log("navbar called")
         setHandler(prev => !prev)
     }
+
+   
     return (
         <div>
             <div className='main-root'>
@@ -91,7 +92,8 @@ function Navbar() {
                     <SideBar sendhandler={sendhandler} />
                 </>
                 <div style={{ marginLeft: "50px", marginTop: "50px" }}>
-                    <DisplayMsg send={handler} />
+                 <DisplayMsg send={handler} />                 
+                
                 </div>
             </div>
         </div>

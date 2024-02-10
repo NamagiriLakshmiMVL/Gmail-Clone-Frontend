@@ -28,15 +28,17 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-}; 
+};
 
 
-export default function SideBar({sendhandler=()=>{}}) {
+export default function SideBar({ sendhandler = () => { } }) {
     const navigate = useNavigate()
-    const handleOpen = () => setOpen(true);
+    
+    const handleOpen = () => {
+        setOpen(true)
+    };
     const handleClose = () => setOpen(false);
     const [open, setOpen] = useState(false);
-   
 
     const from = JSON.parse(localStorage.getItem("email"))
     const handleSubmit = (e) => {
@@ -44,13 +46,13 @@ export default function SideBar({sendhandler=()=>{}}) {
         const reqObject = {
             from: e.target.from.value,
             to: e.target.to.value,
-            subject:e.target.subject.value,
+            subject: e.target.subject.value,
             message: e.target.message.value
 
         }
         axios.post(`${API}/gmail/sent`, reqObject)
             .then(() => alert("Message Sent Successfully"))
-             .then(() => setOpen(false))
+            .then(() => setOpen(false))
     }
 
     return (
@@ -77,9 +79,9 @@ export default function SideBar({sendhandler=()=>{}}) {
                             <ListItemIcon>
                                 <SendIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Sent"  />
+                            <ListItemText primary="Sent" />
                         </ListItemButton>
-                        <ListItemButton onClick={()=>navigate("/gmail/getting-star")}>
+                        <ListItemButton onClick={()=>navigate("/gmail/getting-star")} >
                             <ListItemIcon >
                                 <StarBorder />
                             </ListItemIcon>
@@ -108,7 +110,8 @@ export default function SideBar({sendhandler=()=>{}}) {
                 <nav aria-label="secondary mailbox folders">
                     <List>
                         <ListItem disablePadding>
-                            <ListItemButton onClick={()=>navigate("/info/getting-delete")}>
+                            <ListItemButton onClick={()=>navigate("/info/getting-delete")} >
+                               
                                 <ListItemText primary="Trash" />
                             </ListItemButton>
                         </ListItem>
@@ -129,26 +132,26 @@ export default function SideBar({sendhandler=()=>{}}) {
 
                 <Box sx={style}>
                     <form onSubmit={(e) => handleSubmit(e)} >
-                        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-                        <h2>New Message</h2>
-                        <CloseIcon style={{cursor:"pointer"}} onClick={()=>setOpen(false)}/>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                            <h2>New Message</h2>
+                            <CloseIcon style={{ cursor: "pointer" }} onClick={() => setOpen(false)} />
                         </div>
-                        
+
                         <label>from:</label>
                         <input type="text" name="from" value={from} />
-                        <br /><br/>
+                        <br /><br />
                         <label>To:</label>
                         <input type="text" name="to" />
-                        <br /><br/>
+                        <br /><br />
                         <label>Subject:</label>
                         <input type="text" name="subject" />
-                        <br /><br/>
+                        <br /><br />
                         <label>Message:</label>
                         <input type="text" name="message" />
-                        <br /><br/>
+                        <br /><br />
 
 
-                        <Button type="submit" variant="contained" onClick={()=>sendhandler()}>Send</Button>
+                        <Button type="submit" variant="contained" onClick={() => sendhandler()}>Send</Button>
                     </form>
                 </Box>
 

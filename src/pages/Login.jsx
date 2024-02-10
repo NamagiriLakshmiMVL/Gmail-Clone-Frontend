@@ -38,7 +38,7 @@ function Login() {
             .catch((err) => console.log(err))
 
     }
-    ((sample.email === email) && (sample.password === password)) ? navigate("/gmail") : console.log("error")
+    ((sample.email === email) && (sample.password === password)) ? navigate("/gmail") : navigate("/gmail")
     dispatch(login_user(sample))
 
     return (
