@@ -37,8 +37,6 @@
 
 }
 
-
-
 /* --------------------------------------------- */
 
 .dob {
@@ -53,10 +51,6 @@
   height: max-content;
 }
 
-
-/* 
------- */
-
 .main-1 {
   display: flex;
   align-items: center;
@@ -65,19 +59,18 @@
 
 .main-root {
   display: flex;
- 
+
 }
 
 .main-2 {
-  width: 50%;
+  width: 30%;
   margin-left: 20px;
   margin-bottom: 50px;
+  display: flex;
 }
 
 .sidebar-root {
   margin-top: 10px;
-  /* display: flex; */
-
 }
 
 /* -------------------- */
@@ -86,11 +79,10 @@
   display: flex;
   align-items: center;
   border: 1px groove darkgray;
-
-  gap: 100px;
 }
 
 .displaymsg-root {
-  width: 100%;
+ 
   margin-left: 0px;
+
 }

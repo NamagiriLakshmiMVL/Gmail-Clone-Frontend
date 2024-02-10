@@ -58,7 +58,7 @@ export function TopBar(props) {
 
                 </div>
                 <div className='main-2'>
-                    <Search>
+                    <Search >
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
@@ -67,9 +67,10 @@ export function TopBar(props) {
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </Search>
+                   
                 </div>
-                <div>
-                    <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
+                <div style={{marginLeft:"0px"}}>
+                <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
 
                 </div>
             </div>

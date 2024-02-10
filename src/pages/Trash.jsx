@@ -4,6 +4,8 @@ import { Checkbox, Tooltip, Typography } from '@mui/material';
 import { API } from '../API';
 import DeleteIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import { Button } from '@mui/material';
+import { TopBar } from './TopBar';
+import Navbar from './Navbar';
 
 import DeleteOutlineTwoToneIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import StarBorder from '@mui/icons-material/StarBorder';
@@ -29,8 +31,10 @@ export function Trash() {
 
     return (
         <div>
-            
-            <div>
+             <TopBar/>
+             <div style={{display:"flex"}}>
+            <Navbar/>
+            <div >
                 {sent.map((val) => {
                     return (
                         <div className='displaymsg-root'>
@@ -50,6 +54,7 @@ export function Trash() {
                         </div>
                     )
                 })}
+            </div>
             </div>
         </div>
     )

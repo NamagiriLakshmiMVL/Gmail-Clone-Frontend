@@ -22,9 +22,7 @@ function Navbar() {
     return (
         <div>
            
-
-
-            <SideBar sendhandler={sendhandler} />
+<SideBar sendhandler={sendhandler} />
         </div>
     )
 }

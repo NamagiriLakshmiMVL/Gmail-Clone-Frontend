@@ -20,14 +20,13 @@ function App() {
   return (
     <>
 
-      {val == null && <TopBar />}
+    
 
 
       <div style={{ display: "flex", marginBottom: "20px" }}>
         <BrowserRouter>
         
-        {val != null &&  <NavBar />}
-          <Routes>
+                 <Routes>
          
             <Route path="/" element={<About />} />
             <Route path="/creating-user/name" element={<CreateAccountName />} />

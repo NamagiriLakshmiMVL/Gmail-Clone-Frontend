@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { API } from '../API';
 import DeleteIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import { Button, Checkbox, Tooltip, Typography } from '@mui/material';
-import StarBorder from '@mui/icons-material/StarBorder';
 import ArrowBackTwoToneIcon from '@mui/icons-material/ArrowBackTwoTone';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { star_message } from '../redux/starSlice';
 import { useDispatch } from 'react-redux';
 import StarIcon from '@mui/icons-material/Star';
+import { TopBar } from './TopBar';
+import Navbar from './Navbar';
 
 function DisplayMsg({ send }) {
     const dispatch = useDispatch()
@@ -16,7 +17,7 @@ function DisplayMsg({ send }) {
     const [remove, setRemove] = useState(false);
     const [star, setStar] = useState([])
     const items = JSON.parse(localStorage.getItem('email'));
-    const result = {items}
+    const result = { items }
     useEffect(() => {
         console.log("useEfect called")
         axios.post(`${API}/gmail/getting-msg`, result)
@@ -41,33 +42,38 @@ function DisplayMsg({ send }) {
     const handleStar = async (id) => {
         dispatch(star_message(id))
         console.log(id)
-        if(star.includes(id)){
-            setStar(prev => prev.filter(ele => ele !==id))
+        if (star.includes(id)) {
+            setStar(prev => prev.filter(ele => ele !== id))
         } else {
-        setStar(prev => [...prev, id])
+            setStar(prev => [...prev, id])
         }
     }
     console.log(star)
     return (
         <div>
-            <ArrowBackTwoToneIcon />
-            {message.map((details) => {
-                return (
-                    <div className='displaymsg-root'>
-                        <Tooltip title={details.message}>
-                            <table className="displaymsg">
-                                <Checkbox size='small' />
-                                {console.log(star,details,star.includes(details._id))}
-                                <Button onClick={() => handleStar(details._id)}> {star.includes(details._id) ? <StarIcon /> : <StarBorderIcon />}</Button>
-                                <Typography style={{ width: 200 }}>{details.from}</Typography>
-                                <Typography style={{ width: 200 }}>{details.subject}</Typography>
-                                <Typography style={{ width: 200 }}>{details.message}</Typography>
-                                <Button onClick={() => handleDelete(details)}><DeleteIcon color='inherit' /></Button>
-                            </table>
-                        </Tooltip>
-                    </div>
-                )
-            })}
+            <TopBar />
+            <div style={{ display: "flex" }}>
+                <Navbar />
+                <div style={{marginLeft:"80px"}}>
+                    {message.map((details) => {
+                        return (
+                            <div className='displaymsg-root'>
+                                <Tooltip title={details.message}>
+                                    <table className="displaymsg" style={{ width: "fit-content" }}>
+                                        <Checkbox size='small' />
+                                        {console.log(star, details, star.includes(details._id))}
+                                        <Button onClick={() => handleStar(details._id)}> {star.includes(details._id) ? <StarIcon /> : <StarBorderIcon />}</Button>
+                                        <Typography style={{ width: 200 }}>{details.from}</Typography>
+                                        <Typography style={{ width: 200 }}>{details.subject}</Typography>
+                                        <Typography style={{ width: 200 }}>{details.message}</Typography>
+                                        <Button onClick={() => handleDelete(details)}><DeleteIcon color='inherit' /></Button>
+                                    </table>
+                                </Tooltip>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
         </div >
     )
 }
