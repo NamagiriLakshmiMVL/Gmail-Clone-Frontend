@@ -65,6 +65,7 @@ export function TopBar(props) {
                         <StyledInputBase
                             placeholder="Search mail"
                             inputProps={{ 'aria-label': 'search' }}
+                           
                         />
                     </Search>
                    

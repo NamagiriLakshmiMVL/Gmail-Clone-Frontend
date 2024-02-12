@@ -59,7 +59,7 @@ function DisplayMsg({ send }) {
                         return (
                             <div className='displaymsg-root'>
                                 <Tooltip title={details.message}>
-                                    <table className="displaymsg" style={{ width: "fit-content" }}>
+                                    <table className="displaymsg" style={{ width: "130%",cursor:"pointer" , backgroundColor:"lightgray"}}>
                                         <Checkbox size='small' />
                                         {console.log(star, details, star.includes(details._id))}
                                         <Button onClick={() => handleStar(details._id)}> {star.includes(details._id) ? <StarIcon /> : <StarBorderIcon />}</Button>
