@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Button, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { new_user } from '../redux/userSlice'
 
 
@@ -32,23 +32,15 @@ function CreatingAccountDob() {
         const day = data.get("day")
         const year = data.get("year")
 
-        const newUserdob = {
-            day,
-            month,
-            year,
-            gender
-        }
-        dispatch(new_user(["day",day]))
-        dispatch(new_user(["month",month]))
-        dispatch(new_user(["year",year]))
-        dispatch(new_user(["gender",gender]))
-       
+        dispatch(new_user(["day", day]))
+        dispatch(new_user(["month", month]))
+        dispatch(new_user(["year", year]))
+        dispatch(new_user(["gender", gender]))
 
-        // console.log(newUserdob)
         navigate("/creating-user/gmail")
     }
 
-   
+
     return (
         <div className='creating-account-dob'>
             <form onSubmit={(e) => handleSubmit(e)}>
@@ -90,7 +82,7 @@ function CreatingAccountDob() {
                     <br /><br />
                 </div>
 
-                <Box sx={{ width: "110px" }}>
+                <Box sx={{ width: "110px" , marginLeft:"56px",marginTop:"15px" }}>
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">Gender</InputLabel>
                         <Select
@@ -112,7 +104,7 @@ function CreatingAccountDob() {
 
 
                 <br />
-                <Button variant="contained" type='submit' >Next</Button>
+                <Button style={{marginBottom:"20px"}} variant="contained" type='submit' >Next</Button>
             </form>
 
         </div>

@@ -4,9 +4,7 @@ import {useNavigate} from "react-router-dom"
 import {useDispatch } from 'react-redux'
 import { new_user } from '../redux/userSlice'
 
-
-
- function CreateAccountName() {
+function CreateAccountName() {
  const navigate = useNavigate()
  const dispatch = useDispatch()
     const handleSubmit = (e) => {
@@ -18,8 +16,6 @@ import { new_user } from '../redux/userSlice'
             dispatch(new_user(["firstname",firstname]))
             dispatch(new_user(["lastname",lastname]))
             
-            
-          
             navigate("/creating-user/dob")
            
     }
@@ -34,7 +30,7 @@ import { new_user } from '../redux/userSlice'
                 <br /><br />
                 <TextField label="Last name(optional)" variant="outlined" name='lastname' />
                 <br /><br />
-                <Button variant="contained" type='submit' >Next</Button>
+                <Button style={{marginBottom:"20px"}} variant="contained" type='submit' >Next</Button>
             </form>
 
 

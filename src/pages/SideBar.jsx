@@ -24,7 +24,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 800,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -42,7 +42,7 @@ export default function SideBar({ sendhandler = () => { } }) {
     const [open, setOpen] = useState(false);
 
     const from = JSON.parse(localStorage.getItem("email"))
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault()
 
         const data = new FormData(e.target)
@@ -53,7 +53,7 @@ export default function SideBar({ sendhandler = () => { } }) {
             message: data.get("message")
 
         }
-        axios.post(`${API}/gmail/sent`, reqObject)
+        await axios.post(`${API}/gmail/sent`, reqObject)
             .then(() => alert("Message Sent Successfully"))
             .then(() => setOpen(false))
     }
@@ -139,21 +139,20 @@ export default function SideBar({ sendhandler = () => { } }) {
                             <h2>New Message</h2>
                             <CloseIcon style={{ cursor: "pointer" }} onClick={() => setOpen(false)} />
                         </div>
-                        <TextField label="From" name='from' value={from} />
+                        <TextField label="From" name='from' value={from} style={{ width: "100%" }} />
                         <br /><br />
-                        <TextField label="To" name='to' />
+                        <TextField label="To" name='to' style={{ width: "100%" }} />
                         <br /><br />
-                        <TextField label="Subject" name='subject' />
+                        <TextField label="Subject" name='subject' style={{ width: "100%" }} />
                         <br /><br />
-                        
-                        <TextField label="Message" name='message' />
+
+                        <TextField label="Message" name='message' style={{ width: "100%" }} />
                         <br /><br />
 
 
                         <Button type="submit" variant="contained" onClick={() => sendhandler()}>Send</Button>
                     </form>
                 </Box>
-
             </Modal>
         </div>
     )

@@ -19,7 +19,7 @@ function DisplayMsg({ send }) {
     const items = JSON.parse(localStorage.getItem('email'));
     const result = { items }
     useEffect(() => {
-        console.log("useEfect called")
+       
         axios.post(`${API}/gmail/getting-msg`, result)
             .then((res) => setMessage(res.data))
     }, [send, remove])
@@ -48,7 +48,7 @@ function DisplayMsg({ send }) {
             setStar(prev => [...prev, id])
         }
     }
-    console.log(star)
+   
     return (
         <div>
             <TopBar />

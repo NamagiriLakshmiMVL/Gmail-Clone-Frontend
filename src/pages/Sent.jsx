@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { Checkbox, Tooltip, Typography } from '@mui/material';
 import { API } from '../API';
 import DeleteOutlineTwoToneIcon from '@mui/icons-material/DeleteOutlineTwoTone';
-import StarBorder from '@mui/icons-material/StarBorder';
 import { TopBar } from './TopBar';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 import Navbar from './Navbar';
 
 
@@ -32,7 +32,7 @@ export function Sent() {
                                 <Tooltip title={val.message}>
                                     <table className="displaymsg" style={{ width: "130%",cursor:"pointer", backgroundColor:"lightgray" }} onClick={() => console.log(val._id)}>
                                         <Checkbox size='small' />
-                                        <StarBorder fontSize='small' style={{ marginRight: 10 }} />
+                                        <StarBorderIcon />
                                         <Typography style={{ width: 200 }}>{val.to}</Typography>
                                         <Typography style={{ width: 200 }}>{val.subject}</Typography>
                                         <Typography style={{ width: 200 }}>{val.message}</Typography>

@@ -47,33 +47,31 @@ export function TopBar(props) {
             },
         },
     }));
-    
+    const avatar = localStorage.getItem("email")
     return (
         <div className='main-root'>
-                <div className='main-1'>
-                    <MenuIcon />
+            <div className='main-1'>
+                <MenuIcon />
+                <img src='https://1000logos.net/wp-content/uploads/2021/05/Gmail-logo.png' alt='Email' width="70px" height="40px" />
+                <span style={{ color: "#5f6368", fontFamily: "sans-serif", fontSize: "25px", marginTop: "8px" }}>Gmail</span>
 
-                    <img src='https://1000logos.net/wp-content/uploads/2021/05/Gmail-logo.png' alt='Email' width="70px" height="40px" />
-                    <span style={{ color: "#5f6368", fontFamily: "sans-serif", fontSize: "25px", marginTop: "8px" }}>Gmail</span>
-
-                </div>
-                <div className='main-2'>
-                    <Search >
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search mail"
-                            inputProps={{ 'aria-label': 'search' }}
-                           
-                        />
-                    </Search>
-                   
-                </div>
-                <div style={{marginLeft:"0px"}}>
-                <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
-
-                </div>
             </div>
+            <div className='main-2'>
+                <Search >
+                    <SearchIconWrapper>
+                        <SearchIcon />
+                    </SearchIconWrapper>
+                    <StyledInputBase
+                        placeholder="Search mail"
+                        inputProps={{ 'aria-label': 'search' }}
+
+                    />
+                </Search>
+
+            </div>
+            <div style={{ marginLeft: "0px" }}>
+                <Avatar sx={{ bgcolor: deepOrange[500] }}>{avatar[1]}</Avatar>
+            </div>
+        </div>
     )
 }

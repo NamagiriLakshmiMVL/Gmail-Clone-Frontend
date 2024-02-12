@@ -10,35 +10,32 @@ function CreateAccountGmail() {
     const [password, setPassword] = useState("")
 
     const user = useSelector((state) => state.userSlice.userDetails)
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
-        console.log("User", user)
         const result = {
             ...user,
             password: password
         }
-        axios.post(`${API}creating-user/password`, result)
+        console.log(result)
+        axios.post(`${API}/creating-user/password`, result)
             .then((res) => {
-                navigate("/gmail")
-                console.log(res.data)
+                { res.data === "Created User Successfully" ? navigate("/gmail/display-msg") : alert(res.data) }
+
             })
             .catch((err) => console.log(err))
     }
 
     return (
-        <div>
+        <div className='creating-account'>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <h1>Google</h1>
                 <h2>Create a Gmail Password</h2>
                 <h4>Enter your password</h4>
                 <TextField label="Create a Gmail Password" name='password' onChange={(e) => setPassword(e.target.value)} />
                 <br /><br />
-
-
                 <Button variant="contained" type='submit'  >Next</Button>
             </form>
             <br />
-            {/* <Button variant="contained" onClick={() => handleGmail()} >Create Gmail</Button> */}
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ function About() {
     const navigate = useNavigate()
    
    
-      localStorage.setItem("email",null)
+     
     return (
         <div >
             <div className='navbar-home'>
@@ -28,7 +28,7 @@ function About() {
                     <Button style={{ marginTop: "30px" }} variant="contained" size='larger' onClick={() => navigate("/creating-user/name")}>Create an account</Button>
                 </div>
                 <div className='home-image'>
-                    {/* <img src='https://lh3.googleusercontent.com/PWXM4hp9lRRezHTV86SqLwhRQMz4_Lk08jll3GkWBvBZy_Uk6kvUvwIrVilwaIW2mHZJoccchG6o9a5UdOJEwQPf9oJGmOGSglo3VW0=rw-e365-w2880' alt="Gmail" /> */}
+                    <img src='https://img.freepik.com/free-vector/male-female-friends-talking-drinking-beer_74855-6547.jpg' alt='Chat'/>
                 </div>
             </div>
         </div>

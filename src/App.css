@@ -25,16 +25,17 @@
 }
 
 .home-image {
-  margin-left: 700px;
+  margin-left: 100px;
+  margin-top: 100px;
 
 }
 
 .creating-account {
-  border: 1px solid lightgray;
+  border: 1px solid black;
   width: 30%;
   text-align: center;
-  height: 40%;
-
+  margin-left: 480px;
+  margin-top: 100px;
 }
 
 /* --------------------------------------------- */
@@ -42,13 +43,18 @@
 .dob {
   display: flex;
   gap: 20px;
+  justify-content: center;
+  align-items: center;
+  
 }
 
 .creating-account-dob {
-  border: 1px solid lightgray;
-  width: 50%;
+  border: 1px solid black;
+  width: 35%;
   text-align: center;
-  height: max-content;
+  margin-left: 450px;
+  margin-top: 120px;
+
 }
 
 .main-1 {
@@ -59,13 +65,13 @@
 
 .main-root {
   display: flex;
+  align-items: center;
 
 }
 
 .main-2 {
   width: fit-content;
-  margin-left: 20px;
-  margin-bottom: 50px;
+  margin-left: 40px;
   display: flex;
 }
 
@@ -78,7 +84,7 @@
 .displaymsg {
   display: flex;
   align-items: center;
-  border: 1px groove darkgray;
+  border: 1px groove black;
  
 }
 

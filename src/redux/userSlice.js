@@ -11,7 +11,6 @@ const userSlice = createSlice({
         new_user:(state,action)=>{
            
            state.userDetails[action.payload[0]]=action.payload[1]
-
         }
     }
 })
