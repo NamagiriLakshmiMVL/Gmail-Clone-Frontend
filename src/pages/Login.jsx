@@ -17,7 +17,7 @@ function Login() {
         }
         localStorage.setItem("email", JSON.stringify(email))
 
-        axios.post(`${API}/creating-user/login`, result)
+        await axios.post(`${API}/creating-user/login`, result)
             .then((res) => {
                 { res.data === "Login Successfull" ? navigate("/gmail/display-msg") : alert(res.data) }
             })

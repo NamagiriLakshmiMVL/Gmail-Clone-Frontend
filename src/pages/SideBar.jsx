@@ -32,9 +32,13 @@ const style = {
 };
 
 
-export default function SideBar({ sendhandler = () => { } }) {
+export default function SideBar() {
     const navigate = useNavigate()
+    const [send, setSend] = useState(false)
 
+    const sendhandler = () => {
+        setSend(prev => !prev)
+    }
     const handleOpen = () => {
         setOpen(true)
     };
@@ -42,7 +46,7 @@ export default function SideBar({ sendhandler = () => { } }) {
     const [open, setOpen] = useState(false);
 
     const from = JSON.parse(localStorage.getItem("email"))
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         const data = new FormData(e.target)
@@ -60,10 +64,9 @@ export default function SideBar({ sendhandler = () => { } }) {
 
     return (
         <div>
-            <Box sx={{ maxWidth: 200, bgcolor: 'background.paper' }}>
+            <Box sx={{ maxWidth: 200, bgcolor: 'background.paper' , marginTop:"20px" }}>
                 <nav aria-label="main mailbox folders">
                     <List>
-
                         <ListItemButton onClick={handleOpen}>
                             <ListItemIcon>
                                 <EditIcon />
@@ -96,16 +99,6 @@ export default function SideBar({ sendhandler = () => { } }) {
                             </ListItemIcon>
                             <ListItemText primary="All Mail" />
                         </ListItemButton>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <DraftsIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Drafts" />
-                            </ListItemButton>
-
-                        </ListItem>
-
                     </List>
 
                 </nav>
@@ -118,11 +111,6 @@ export default function SideBar({ sendhandler = () => { } }) {
                                 <ListItemText primary="Trash" />
                             </ListItemButton>
                         </ListItem>
-                        <ListItem disablePadding>
-                            <ListItemButton component="a" href="#simple-list">
-                                <ListItemText primary="Spam" />
-                            </ListItemButton>
-                        </ListItem>
                     </List>
                 </nav>
             </Box>
@@ -132,7 +120,6 @@ export default function SideBar({ sendhandler = () => { } }) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-
                 <Box sx={style}>
                     <form onSubmit={(e) => handleSubmit(e)} >
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -148,7 +135,6 @@ export default function SideBar({ sendhandler = () => { } }) {
 
                         <TextField label="Message" name='message' style={{ width: "100%" }} />
                         <br /><br />
-
 
                         <Button type="submit" variant="contained" onClick={() => sendhandler()}>Send</Button>
                     </form>

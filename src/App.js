@@ -19,11 +19,7 @@ function App() {
   const val = localStorage.getItem("email")
   return (
     <>
-
-    
-
-
-      <div style={{ display: "flex", marginBottom: "20px" }}>
+<div style={{ display: "flex", marginBottom: "20px" }}>
         <BrowserRouter>
         
                  <Routes>

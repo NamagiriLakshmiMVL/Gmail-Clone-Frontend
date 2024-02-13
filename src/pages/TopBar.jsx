@@ -51,7 +51,6 @@ export function TopBar(props) {
     return (
         <div className='main-root'>
             <div className='main-1'>
-                <MenuIcon />
                 <img src='https://1000logos.net/wp-content/uploads/2021/05/Gmail-logo.png' alt='Email' width="70px" height="40px" />
                 <span style={{ color: "#5f6368", fontFamily: "sans-serif", fontSize: "25px", marginTop: "8px" }}>Gmail</span>
 

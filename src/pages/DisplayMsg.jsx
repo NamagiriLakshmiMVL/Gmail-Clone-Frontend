@@ -11,20 +11,20 @@ import StarIcon from '@mui/icons-material/Star';
 import { TopBar } from './TopBar';
 import Navbar from './Navbar';
 
-function DisplayMsg({ send }) {
+function DisplayMsg() {
     const dispatch = useDispatch()
     const [message, setMessage] = useState([])
     const [remove, setRemove] = useState(false);
+    const [send, setSend] = useState(false);
     const [star, setStar] = useState([])
     const items = JSON.parse(localStorage.getItem('email'));
     const result = { items }
     useEffect(() => {
-       
+        
         axios.post(`${API}/gmail/getting-msg`, result)
             .then((res) => setMessage(res.data))
-    }, [send, remove])
-
-
+            // setSend(prev => !prev);
+    }, [ remove])
 
     const handleDelete = async (id) => {
         const newdata = {
@@ -32,7 +32,6 @@ function DisplayMsg({ send }) {
         }
         await axios.post(`${API}/info/delete`, id)
             .then((res) => console.log(res.data))
-
 
         await axios.post(`${API}/gmail/deleting-msg`, newdata)
             .then((res) => alert(res.data))
@@ -48,20 +47,19 @@ function DisplayMsg({ send }) {
             setStar(prev => [...prev, id])
         }
     }
-   
+
     return (
         <div>
             <TopBar />
             <div style={{ display: "flex" }}>
                 <Navbar />
-                <div style={{marginLeft:"80px"}}>
+                <div style={{ marginLeft: "80px", marginTop: "60px" }}>
                     {message.map((details) => {
                         return (
                             <div className='displaymsg-root'>
                                 <Tooltip title={details.message}>
-                                    <table className="displaymsg" style={{ width: "130%",cursor:"pointer" , backgroundColor:"lightgray"}}>
+                                    <table className="displaymsg" style={{ width: "130%", cursor: "pointer", backgroundColor: "lightgray" }}>
                                         <Checkbox size='small' />
-                                        {console.log(star, details, star.includes(details._id))}
                                         <Button onClick={() => handleStar(details._id)}> {star.includes(details._id) ? <StarIcon /> : <StarBorderIcon />}</Button>
                                         <Typography style={{ width: 200 }}>{details.from}</Typography>
                                         <Typography style={{ width: 200 }}>{details.subject}</Typography>
