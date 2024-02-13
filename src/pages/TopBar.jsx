@@ -1,5 +1,4 @@
 import React from 'react';
-import MenuIcon from '@mui/icons-material/Menu';
 import { Avatar } from '@mui/material';
 import { deepOrange } from '@mui/material/colors';
 import SearchIcon from '@mui/icons-material/Search';

@@ -27,11 +27,11 @@ function CreateAccountGmail() {
 
     return (
         <div className='creating-account'>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form id= "password" onSubmit={(e) => handleSubmit(e)}>
                 <h1>Google</h1>
                 <h2>Create a Gmail Password</h2>
                 <h4>Enter your password</h4>
-                <TextField label="Create a Gmail Password" name='password' onChange={(e) => setPassword(e.target.value)} />
+                <TextField label="Create a Gmail Password" id="pass" name='password' onChange={(e) => setPassword(e.target.value)} />
                 <br /><br />
                 <Button variant="contained" type='submit'  >Next</Button>
             </form>

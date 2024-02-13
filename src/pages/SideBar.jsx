@@ -9,7 +9,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import InboxIcon from '@mui/icons-material/Inbox';
-import DraftsIcon from '@mui/icons-material/Drafts';
 import SendIcon from '@mui/icons-material/Send';
 import StarBorder from '@mui/icons-material/StarBorder';
 import MailIcon from '@mui/icons-material/Mail';
@@ -64,7 +63,7 @@ export default function SideBar() {
 
     return (
         <div>
-            <Box sx={{ maxWidth: 200, bgcolor: 'background.paper' , marginTop:"20px" }}>
+            <Box sx={{ maxWidth: 200, bgcolor: 'background.paper', marginTop: "20px" }}>
                 <nav aria-label="main mailbox folders">
                     <List>
                         <ListItemButton onClick={handleOpen}>
@@ -107,7 +106,6 @@ export default function SideBar() {
                     <List>
                         <ListItem disablePadding>
                             <ListItemButton onClick={() => navigate("/info/getting-delete")} >
-
                                 <ListItemText primary="Trash" />
                             </ListItemButton>
                         </ListItem>
@@ -121,19 +119,19 @@ export default function SideBar() {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <form onSubmit={(e) => handleSubmit(e)} >
+                    <form onSubmit={(e) => handleSubmit(e)} id='compose' >
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                             <h2>New Message</h2>
                             <CloseIcon style={{ cursor: "pointer" }} onClick={() => setOpen(false)} />
                         </div>
-                        <TextField label="From" name='from' value={from} style={{ width: "100%" }} />
+                        <TextField id="afrom" label="From" name='from' value={from} style={{ width: "100%" }} />
                         <br /><br />
-                        <TextField label="To" name='to' style={{ width: "100%" }} />
+                        <TextField id="ato" label="To" name='to' style={{ width: "100%" }} />
                         <br /><br />
-                        <TextField label="Subject" name='subject' style={{ width: "100%" }} />
+                        <TextField id='asubject' label="Subject" name='subject' style={{ width: "100%" }} />
                         <br /><br />
 
-                        <TextField label="Message" name='message' style={{ width: "100%" }} />
+                        <TextField id='amessage' label="Message" name='message' style={{ width: "100%" }} />
                         <br /><br />
 
                         <Button type="submit" variant="contained" onClick={() => sendhandler()}>Send</Button>

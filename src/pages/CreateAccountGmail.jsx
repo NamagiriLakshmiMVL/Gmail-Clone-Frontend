@@ -22,11 +22,11 @@ function CreateAccountGmail() {
 
     return (
         <div className='creating-account'>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form onSubmit={(e) => handleSubmit(e)} id='sgmail'>
                 <h1>Google</h1>
                 <h2>Create a Gmail Address</h2>
                 <h4>Enter your Gmail</h4>
-                <TextField label="Create a Gmail Address" name='gmail' />
+                <TextField label="Create a Gmail Address" name='gmail' id='gmail'/>
                 <br /><br />
                 <Button style={{ marginBottom: "20px" }} variant="contained" type='submit' >Next</Button>
             </form>

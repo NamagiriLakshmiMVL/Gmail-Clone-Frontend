@@ -38,7 +38,7 @@ export function Trash() {
                             <div className='displaymsg-root'>
                                 <Tooltip title={val.message}>
                                     <table className="displaymsg" style={{ width: "130%", cursor: "pointer", backgroundColor: "lightgray" }} onClick={() => console.log(val._id)}>
-                                        <Checkbox size='small' />
+                                        <Checkbox size='small' id='checkbox' />
                                         <StarBorder fontSize='small' style={{ marginRight: 10 }} />
                                         <Typography style={{ width: 200 }}>{val.to}</Typography>
                                         <Typography style={{ width: 200 }}>{val.subject}</Typography>

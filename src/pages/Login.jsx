@@ -31,9 +31,9 @@ function Login() {
                 <h1>Google</h1>
                 <h2>Sign in to Google Account</h2>
 
-                <TextField label="Email" name='email' placeholder="john@gmail.com" />
+                <TextField label="Email" name='email' id='loginemail' placeholder="john@gmail.com" />
                 <br /><br />
-                <TextField label="Password" variant="outlined" name='password' placeholder="john@123" />
+                <TextField label="Password" variant="outlined" id='loginpass' name='password' placeholder="john@123" />
                 <br /><br />
                 <Button style={{marginBottom:"10px"}} variant="contained" type='submit' >Next</Button>
             </form>

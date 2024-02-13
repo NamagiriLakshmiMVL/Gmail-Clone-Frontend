@@ -22,13 +22,13 @@ function CreateAccountName() {
     
     return (
         <div className='creating-account'>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form id="name" onSubmit={(e) => handleSubmit(e)}>
                 <h1>Google</h1>
                 <h2>Create a Google Account</h2>
                 <h4>Enter your name</h4>
-                <TextField label="First name" name='firstname' />
+                <TextField label="First name" name='firstname' id='fname' />
                 <br /><br />
-                <TextField label="Last name(optional)" variant="outlined" name='lastname' />
+                <TextField label="Last name(optional)" variant="outlined" name='lastname' id='lname' />
                 <br /><br />
                 <Button style={{marginBottom:"20px"}} variant="contained" type='submit' >Next</Button>
             </form>

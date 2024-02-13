@@ -43,12 +43,12 @@ function CreatingAccountDob() {
 
     return (
         <div className='creating-account-dob'>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form onSubmit={(e) => handleSubmit(e)} id='day'>
                 <h1>Google</h1>
                 <h2>Basic information</h2>
                 <h4>Enter your birthday and gender</h4>
                 <div className='dob'>
-                    <TextField sx={{ width: "110px" }} label="Day" name='day' />
+                    <TextField sx={{ width: "110px" }} label="Day" name='day' id='dayy' />
 
                     <Box sx={{ width: "110px" }}>
                         <FormControl fullWidth>
@@ -78,7 +78,7 @@ function CreatingAccountDob() {
                     </Box>
 
 
-                    <TextField sx={{ width: "110px" }} label="Year" name='year' />
+                    <TextField sx={{ width: "110px" }} label="Year" name='year' id='year' />
                     <br /><br />
                 </div>
 
@@ -92,8 +92,8 @@ function CreatingAccountDob() {
 
                             onChange={handleChangegender}
                         >
-                            <MenuItem value={"Male"}>Male</MenuItem>
-                            <MenuItem value={"Female"}>Female</MenuItem>
+                            <MenuItem id='male' value={"Male"}>Male</MenuItem>
+                            <MenuItem id="female" value={"Female"}>Female</MenuItem>
 
 
                         </Select>
