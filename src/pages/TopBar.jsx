@@ -1,12 +1,14 @@
-import React from 'react';
-import { Avatar } from '@mui/material';
+import React,{useState} from 'react';
+import { Avatar, TextField } from '@mui/material';
 import { deepOrange } from '@mui/material/colors';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
+import axios from "axios";
+import {API} from "../API"
 
 export function TopBar(props) {
-
+const [searchVal,setSearchVal] = useState("")
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
         borderRadius: "20px",
@@ -47,6 +49,19 @@ export function TopBar(props) {
         },
     }));
     const avatar = localStorage.getItem("email")
+
+    const handleChange = async(e) =>{
+      await setSearchVal(e.target.value)
+      console.log(searchVal)
+        
+        
+        const newdata = {
+            items: e.target.value
+        }
+
+        await axios.post(`${API}/gmail/search-msg`,newdata)
+        .then((res)=>console.log(res.data))
+    }
     return (
         <div className='main-root'>
             <div className='main-1'>
@@ -55,16 +70,17 @@ export function TopBar(props) {
 
             </div>
             <div className='main-2'>
-                <Search >
-                    <SearchIconWrapper>
+                {/* <Search >
+                    <SearchIconWrapper >
                         <SearchIcon />
                     </SearchIconWrapper>
                     <StyledInputBase
                         placeholder="Search mail"
                         inputProps={{ 'aria-label': 'search' }}
-
+                       onChange={(e)=>handleChange(e)}
                     />
-                </Search>
+                </Search> */}
+                <TextField onChange={(e)=>handleChange(e)} value={searchVal}/>
 
             </div>
             <div style={{ marginLeft: "0px" }}>

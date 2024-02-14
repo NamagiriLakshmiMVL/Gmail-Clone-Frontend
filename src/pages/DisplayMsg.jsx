@@ -51,10 +51,8 @@ function DisplayMsg() {
             .then((res) => {
                 setMessage(res.data)
                 setSend(prev => !prev)
-        })
-           
-
-    }, [send], [remove])
+            })
+    }, [remove])
     const handleClose = () => setOpen(false);
     const [open, setOpen] = useState(false);
     const handleOpen = (val) => {
@@ -85,9 +83,9 @@ function DisplayMsg() {
     const avatar = localStorage.getItem("email")
     return (
         <div>
-            <TopBar />
-            <div style={{ display: "flex" }}>
-                <Navbar />
+           <Box sx={{ display: { xs: "none", sm: "flex" } }}> <TopBar /></Box>
+            <div style={{ display: "flex" }} >
+                <Box sx={{ display: { xs: "none", md: "flex" } }}><Navbar /></Box>
                 <div style={{ marginLeft: "80px", marginTop: "60px" }}>
                     {message.map((details) => {
                         return (
@@ -96,13 +94,48 @@ function DisplayMsg() {
                                     <table className="displaymsg" style={{ width: "130%", cursor: "pointer", backgroundColor: "lightgray" }}>
                                         <Checkbox size='small' />
                                         <Button onClick={() => handleStar(details._id)}> {star.includes(details._id) ? <StarIcon /> : <StarBorderIcon />}</Button>
-                                        <Box onClick={() => handleOpen(details)} sx={{display:"flex"}}>
+                                        <Box onClick={() => handleOpen(details)} sx={{
+                                            display: "flex", width: {
+                                                xs: 100,
+                                                sm: 200,
+                                                md: 300,
+                                                lg: 500
+                                            }
+                                        }}>
 
-                                        <Typography style={{ width: 200 }} id="from">{details.from}</Typography>
-                                        <Typography style={{ width: 200 }} id="subject">{details.subject}</Typography>
-                                        <Typography style={{ width: 200 }} id="message">{details.message}</Typography>
+                                            <Typography sx={{
+                                                fontSize: {
+                                                    xs: 10,
+                                                    sm: 11,
+                                                    md: 15,
+                                                    lg: 17,
+                                                }
+                                            }} style={{ width: 200 }} id="from">{details.from}</Typography>
+                                            <Typography sx={{
+                                                fontSize: {
+                                                    xs: 8,
+                                                    sm: 11,
+                                                    md: 15,
+                                                    lg: 17,
+                                                }
+                                            }} style={{ width: 200 }} id="subject">{details.subject}</Typography>
+                                            <Typography sx={{
+                                                fontSize: {
+                                                    xs: 8,
+                                                    sm: 11,
+                                                    md: 15,
+                                                    lg: 17,
+                                                }
+                                            }} style={{ width: 200 }} id="message">{details.message}</Typography>
                                         </Box>
-                                        <Button onClick={() => handleDelete(details)}><DeleteIcon color='inherit' /></Button>
+                                        <Button onClick={() => handleDelete(details)}><DeleteIcon sx={{
+                                            size: {
+                                                xs: "small",
+                                                sm: "small",
+                                                md: "medium",
+                                                lg: "large",
+                                            }
+                                        }} color='inherit' /></Button>
                                     </table>
                                 </Tooltip>
                             </div>
