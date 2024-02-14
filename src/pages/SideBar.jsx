@@ -18,6 +18,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { API } from '../API'
 import { useNavigate } from 'react-router-dom';
 import { TextField } from '@mui/material';
+import { toast } from 'react-toastify';
 const style = {
     position: 'absolute',
     top: '50%',
@@ -57,7 +58,10 @@ export default function SideBar() {
 
         }
         await axios.post(`${API}/gmail/sent`, reqObject)
-            .then(() => alert("Message Sent Successfully"))
+            .then(() => toast.success("Message Sent Successfully",{
+                position:"top-center",
+                autoClose: 1000,
+            }))
             .then(() => setOpen(false))
     }
 

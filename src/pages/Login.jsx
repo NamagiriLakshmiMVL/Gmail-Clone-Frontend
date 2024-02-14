@@ -3,9 +3,11 @@ import React from 'react'
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { API } from '../API'
+import { toast } from 'react-toastify';
 
 function Login() {
     const navigate = useNavigate()
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = new FormData(e.target);
@@ -19,11 +21,17 @@ function Login() {
 
         await axios.post(`${API}/creating-user/login`, result)
             .then((res) => {
-                { res.data === "Login Successfull" ? navigate("/gmail/display-msg") : alert(res.data) }
+                {
+                    res.data === "Login Successfull" ? navigate("/gmail/display-msg") : toast.error(res.data, {
+                        position: "top-center",
+                        autoClose: 1000,
+                    })
+                }
             })
             .catch((err) => alert(err))
 
     }
+
 
     return (
         <div className='creating-account'>
@@ -35,7 +43,7 @@ function Login() {
                 <br /><br />
                 <TextField label="Password" variant="outlined" id='loginpass' name='password' placeholder="john@123" />
                 <br /><br />
-                <Button style={{marginBottom:"10px"}} variant="contained" type='submit' >Next</Button>
+                <Button style={{ marginBottom: "10px" }} variant="contained" type='submit' >Next</Button>
             </form>
 
         </div>

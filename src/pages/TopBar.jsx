@@ -1,14 +1,14 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { Avatar, TextField } from '@mui/material';
 import { deepOrange } from '@mui/material/colors';
-import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import axios from "axios";
-import {API} from "../API"
+import { API } from "../API"
+import SearchIcon from '@mui/icons-material/Search';
 
-export function TopBar(props) {
-const [searchVal,setSearchVal] = useState("")
+export function TopBar() {
+    const [searchVal, setSearchVal] = useState("")
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
         borderRadius: "20px",
@@ -50,17 +50,14 @@ const [searchVal,setSearchVal] = useState("")
     }));
     const avatar = localStorage.getItem("email")
 
-    const handleChange = async(e) =>{
-      await setSearchVal(e.target.value)
-      console.log(searchVal)
-        
-        
+    const handleChange = (event) => {
+        setSearchVal(event.target.value)
         const newdata = {
-            items: e.target.value
+            items: searchVal
         }
-
-        await axios.post(`${API}/gmail/search-msg`,newdata)
-        .then((res)=>console.log(res.data))
+        console.log(newdata)
+        // await axios.post(`${API}/gmail/search-msg`, newdata)
+        //     .then((res) => console.log(res.data))
     }
     return (
         <div className='main-root'>
@@ -70,17 +67,9 @@ const [searchVal,setSearchVal] = useState("")
 
             </div>
             <div className='main-2'>
-                {/* <Search >
-                    <SearchIconWrapper >
-                        <SearchIcon />
-                    </SearchIconWrapper>
-                    <StyledInputBase
-                        placeholder="Search mail"
-                        inputProps={{ 'aria-label': 'search' }}
-                       onChange={(e)=>handleChange(e)}
-                    />
-                </Search> */}
-                <TextField onChange={(e)=>handleChange(e)} value={searchVal}/>
+                <SearchIcon />
+                <input type='text' style={{ fontSize: "20px", height: "2.5vw", width: "45vw", backgroundColor: "#E4EFFA", border: "none", outline: "none", borderRadius: "30px" }} onChange={(event) => handleChange(event)} />
+
 
             </div>
             <div style={{ marginLeft: "0px" }}>

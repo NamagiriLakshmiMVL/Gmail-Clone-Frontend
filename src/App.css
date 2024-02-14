@@ -73,6 +73,7 @@
   width: fit-content;
   margin-left: 40px;
   display: flex;
+  align-items: center;
 }
 
 .sidebar-root {

@@ -7,6 +7,7 @@ import { Button } from '@mui/material';
 import { TopBar } from './TopBar';
 import Navbar from './Navbar';
 import StarBorder from '@mui/icons-material/StarBorder';
+import { toast } from 'react-toastify';
 
 
 export function Trash() {
@@ -23,7 +24,10 @@ export function Trash() {
         }
 
         await axios.post(`${API}/info/delete-delete`, newdata)
-            .then((res) => alert(res.data))
+            .then((res) => toast.success(res.data,{
+                position:"top-center",
+                autoClose: 1000,
+            }))
         setRemove(prev => !prev);
     }
 

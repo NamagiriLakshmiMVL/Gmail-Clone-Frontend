@@ -14,6 +14,9 @@ import Modal from '@mui/material/Modal';
 import { Avatar } from '@mui/material';
 import { deepOrange } from '@mui/material/colors';
 import CloseIcon from '@mui/icons-material/Close';
+import { toast } from 'react-toastify';
+import RefreshIcon from '@mui/icons-material/Refresh';
+
 
 
 const style = {
@@ -38,27 +41,48 @@ const style1 = {
 
 }
 function DisplayMsg() {
+
     const dispatch = useDispatch()
     const [message, setMessage] = useState([])
     const [remove, setRemove] = useState(false);
     const [send, setSend] = useState(false);
+    const checkbox = []
     const [star, setStar] = useState([])
     const [modal, setModal] = useState([])
     const items = JSON.parse(localStorage.getItem('email'));
     const result = { items }
+
     useEffect(() => {
         axios.post(`${API}/gmail/getting-msg`, result)
             .then((res) => {
                 setMessage(res.data)
-                setSend(prev => !prev)
+
             })
     }, [remove])
+
+    const handleMultiple = () => {
+        const check = {
+            _id: checkbox
+        }
+        axios.post(`${API}/gmail/multiple-delete`, check)
+            .then((res) => {
+                res.data === "Deleted SuccessFully" ? toast.success("Deleted Successfully", {
+                    position: "top-center",
+                    autoClose: 1000,
+                }) : toast.error(res.data)
+            })
+        setRemove(prev => !prev);
+    }
+
     const handleClose = () => setOpen(false);
     const [open, setOpen] = useState(false);
     const handleOpen = (val) => {
         setOpen(true)
         setModal(val)
     };
+    function refreshPage() {
+        window.location.reload(false);
+    }
     const handleDelete = async (id) => {
         const newdata = {
             id
@@ -67,13 +91,16 @@ function DisplayMsg() {
             .then((res) => console.log(res.data))
 
         await axios.post(`${API}/gmail/deleting-msg`, newdata)
-            .then((res) => alert(res.data))
+            .then((res) => toast.success(res.data, {
+                position: "top-center",
+                autoClose: 1000,
+            }))
         setRemove(prev => !prev);
     }
 
     const handleStar = async (id) => {
         dispatch(star_message(id))
-        console.log(id)
+
         if (star.includes(id)) {
             setStar(prev => prev.filter(ele => ele !== id))
         } else {
@@ -81,20 +108,28 @@ function DisplayMsg() {
         }
     }
     const avatar = localStorage.getItem("email")
+    console.log(checkbox)
     return (
         <div>
-           <Box sx={{ display: { xs: "none", sm: "flex" } }}> <TopBar /></Box>
+
+            <Box sx={{ display: { xs: "none", sm: "flex" } }}> <TopBar /></Box>
             <div style={{ display: "flex" }} >
+
                 <Box sx={{ display: { xs: "none", md: "flex" } }}><Navbar /></Box>
-                <div style={{ marginLeft: "80px", marginTop: "60px" }}>
+
+                <div style={{ marginLeft: "80px", marginTop: "20px" }}>
+                    <Tooltip title="Refresh to see the new Data"><Button onClick={refreshPage} ><RefreshIcon /></Button></Tooltip>
+                    <Button onClick={handleMultiple}><DeleteIcon /></Button>
                     {message.map((details) => {
                         return (
                             <div className='displaymsg-root'>
+
                                 <Tooltip title={details.message}>
                                     <table className="displaymsg" style={{ width: "130%", cursor: "pointer", backgroundColor: "lightgray" }}>
-                                        <Checkbox size='small' />
+                                        <Checkbox size='small' onChange={() => checkbox.push(details._id)} />
                                         <Button onClick={() => handleStar(details._id)}> {star.includes(details._id) ? <StarIcon /> : <StarBorderIcon />}</Button>
                                         <Box onClick={() => handleOpen(details)} sx={{
+                                            overflow: "hidden",
                                             display: "flex", width: {
                                                 xs: 100,
                                                 sm: 200,
@@ -109,7 +144,8 @@ function DisplayMsg() {
                                                     sm: 11,
                                                     md: 15,
                                                     lg: 17,
-                                                }
+                                                },
+
                                             }} style={{ width: 200 }} id="from">{details.from}</Typography>
                                             <Typography sx={{
                                                 fontSize: {

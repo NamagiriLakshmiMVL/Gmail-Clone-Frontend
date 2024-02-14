@@ -62,7 +62,7 @@ export function Sent() {
 
     const handleStar = async (id) => {
         dispatch(star_message(id))
-        console.log(id)
+        
         if (star.includes(id)) {
             setStar(prev => prev.filter(ele => ele !== id))
         } else {
