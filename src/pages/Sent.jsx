@@ -14,6 +14,8 @@ import { Avatar } from '@mui/material';
 import { deepOrange } from '@mui/material/colors';
 import CloseIcon from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
+import { toast } from 'react-toastify';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 
 
@@ -40,9 +42,11 @@ const style1 = {
 }
 
 export function Sent() {
+
     const dispatch = useDispatch()
     const [modal, setModal] = useState([])
-
+    const [removedata, setRemovedata] = useState(false)
+    const [check, setCheck] = useState([]);
     const handleClose = () => setOpen(false);
     const [open, setOpen] = useState(false);
     const handleOpen = (val) => {
@@ -58,11 +62,24 @@ export function Sent() {
     useEffect(() => {
         axios.post(`${API}/gmail/getting-sent`, result)
             .then((res) => setSent(res.data))
-    }, [])
-
+    }, [removedata])
+    const handleMultiple = async () => {
+        const check1 = {
+            _id: check
+        }
+        await axios.post(`${API}/gmail/multiple-delete`, check1)
+            .then((res) => {
+                res.data === "Deleted SuccessFully" ? toast.success("Deleted Successfully", {
+                    position: "top-center",
+                    autoClose: 1000,
+                }) : toast.error(res.data)
+            })
+        setRemovedata(prev => !prev);
+        setCheck([])
+    }
     const handleStar = async (id) => {
         dispatch(star_message(id))
-        
+
         if (star.includes(id)) {
             setStar(prev => prev.filter(ele => ele !== id))
         } else {
@@ -70,9 +87,11 @@ export function Sent() {
         }
     }
 
-
-    const handleDelete = (val) =>{
-        setSent(sent.filter((item)=>item._id !== val._id))
+    function refreshPage() {
+        window.location.reload(false);
+    }
+    const handleDelete = (val) => {
+        setSent(sent.filter((item) => item._id !== val._id))
     }
     const avatar = localStorage.getItem("email")
 
@@ -81,18 +100,65 @@ export function Sent() {
             <TopBar />
             <div style={{ display: "flex" }}>
                 <Navbar />
-                <div style={{ marginLeft: "80px", marginTop: "60px" }}>
+                <div style={{ marginLeft: "80px", marginTop: "20px" }}>
+                    <Tooltip title="Refresh to see the new Data"><Button onClick={refreshPage} ><RefreshIcon /></Button></Tooltip>
+                    <Button onClick={handleMultiple}><DeleteIcon /></Button>
                     {sent.map((val) => {
                         return (
                             <div className='displaymsg-root'>
                                 <Tooltip title={val.message}>
-                                    <table className="displaymsg" style={{ width: "130%", cursor: "pointer", backgroundColor: "lightgray" }} >
-                                        <Checkbox size='small' />
+                                    <table className="displaymsg" style={{ width: "110%", cursor: "pointer", backgroundColor: "lightgray" }} >
+                                        <Checkbox size='small' onChange={() => {
+                                            if (check.includes(val._id)) {
+                                                setCheck(prev => prev.filter(ele => ele !== val._id))
+                                            } else {
+                                                setCheck(prev => [...prev, val._id])
+                                            }
+                                        }} checked={check.includes(val._id)} />
                                         <Button onClick={() => handleStar(val._id)}> {star.includes(val._id) ? <StarIcon /> : <StarBorderIcon />}</Button>
-                                        <Box onClick={() => handleOpen(val)} sx={{display:"flex"}}>
-                                        <Typography style={{ width: 200 }}>{val.to}</Typography>
-                                        <Typography style={{ width: 200 }}>{val.subject}</Typography>
-                                        <Typography style={{ width: 200 }}>{val.message}</Typography>
+                                        <Box onClick={() => handleOpen(val)} sx={{
+                                            overflow: "hidden",
+                                            display: "flex", width: {
+                                                xs: 100,
+                                                sm: 200,
+                                                md: 300,
+                                                lg: 500
+                                            }
+                                        }}>
+                                            <Typography sx={{
+                                                fontSize: {
+                                                    xs: 10,
+                                                    sm: 11,
+                                                    md: 15,
+                                                    lg: 17,
+                                                },
+                                                fontWeight:600,
+                                                width: 180,
+                                               
+                                            }} >{val.to}</Typography>
+                                            <Typography sx={{
+                                                fontSize: {
+                                                    xs: 8,
+                                                    sm: 11,
+                                                    md: 15,
+                                                    lg: 17,
+                                                },
+                                                fontWeight:"bold",
+                                                width: 180,
+                                                textOverflow: "ellipsis",
+                                                overflow: "hidden"
+                                            }} >{val.subject}</Typography>
+                                            <Typography sx={{
+                                                fontSize: {
+                                                    xs: 8,
+                                                    sm: 11,
+                                                    md: 15,
+                                                    lg: 17,
+                                                },
+                                                width: 180,
+                                                textOverflow: "ellipsis",
+                                                overflow: " hidden"
+                                            }} >{val.message}</Typography>
                                         </Box>
                                         <Button onClick={() => handleDelete(val)}><DeleteIcon color='inherit' /></Button>
 
@@ -106,7 +172,7 @@ export function Sent() {
                 </div>
             </div>
             <div>
-            <Modal
+                <Modal
                     open={open}
                     onClose={handleClose}
                     aria-labelledby="modal-modal-title"

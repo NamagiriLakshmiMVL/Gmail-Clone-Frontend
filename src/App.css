@@ -1,5 +1,5 @@
 .home-heading {
-  margin-top: 5px;
+  margin-top: 10px;
   display: flex;
 
 }
@@ -32,10 +32,7 @@
 
 .creating-account {
   border: 1px solid black;
-  width: 30%;
   text-align: center;
-  margin-left: 480px;
-  margin-top: 100px;
 }
 
 /* --------------------------------------------- */
@@ -45,7 +42,7 @@
   gap: 20px;
   justify-content: center;
   align-items: center;
-  
+
 }
 
 .creating-account-dob {
@@ -90,12 +87,12 @@
 }
 
 .displaymsg-root {
- 
-  margin-left: 0px;
 
+ 
+  margin-top: 10px
 }
 
-.messageModel{
+.messageModel {
   overflow: scroll;
   text-indent: 50px;
   width: 100%;

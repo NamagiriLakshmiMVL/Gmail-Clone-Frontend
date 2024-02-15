@@ -41,37 +41,38 @@ const style1 = {
 
 }
 function DisplayMsg() {
-
     const dispatch = useDispatch()
     const [message, setMessage] = useState([])
     const [remove, setRemove] = useState(false);
-    const [send, setSend] = useState(false);
-    const checkbox = []
+    const [removedata, setRemovedata] = useState(false)
+    const [check, setCheck] = useState([]);
     const [star, setStar] = useState([])
     const [modal, setModal] = useState([])
     const items = JSON.parse(localStorage.getItem('email'));
     const result = { items }
 
     useEffect(() => {
+        console.log("useEffect fired");
         axios.post(`${API}/gmail/getting-msg`, result)
             .then((res) => {
                 setMessage(res.data)
-
             })
-    }, [remove])
+    }, [remove, removedata])
 
-    const handleMultiple = () => {
-        const check = {
-            _id: checkbox
+
+    const handleMultiple = async () => {
+        const check1 = {
+            _id: check
         }
-        axios.post(`${API}/gmail/multiple-delete`, check)
+        await axios.post(`${API}/gmail/multiple-delete`, check1)
             .then((res) => {
                 res.data === "Deleted SuccessFully" ? toast.success("Deleted Successfully", {
                     position: "top-center",
                     autoClose: 1000,
                 }) : toast.error(res.data)
             })
-        setRemove(prev => !prev);
+        setRemovedata(prev => !prev);
+        setCheck([])
     }
 
     const handleClose = () => setOpen(false);
@@ -108,10 +109,8 @@ function DisplayMsg() {
         }
     }
     const avatar = localStorage.getItem("email")
-    console.log(checkbox)
     return (
         <div>
-
             <Box sx={{ display: { xs: "none", sm: "flex" } }}> <TopBar /></Box>
             <div style={{ display: "flex" }} >
 
@@ -125,8 +124,14 @@ function DisplayMsg() {
                             <div className='displaymsg-root'>
 
                                 <Tooltip title={details.message}>
-                                    <table className="displaymsg" style={{ width: "130%", cursor: "pointer", backgroundColor: "lightgray" }}>
-                                        <Checkbox size='small' onChange={() => checkbox.push(details._id)} />
+                                    <table className="displaymsg" style={{ width: "110%", cursor: "pointer", backgroundColor: "lightgray" }}>
+                                        <Checkbox size='small' onChange={() => {
+                                            if (check.includes(details._id)) {
+                                                setCheck(prev => prev.filter(ele => ele !== details._id))
+                                            } else {
+                                                setCheck(prev => [...prev, details._id])
+                                            }
+                                        }} checked={check.includes(details._id)} />
                                         <Button onClick={() => handleStar(details._id)}> {star.includes(details._id) ? <StarIcon /> : <StarBorderIcon />}</Button>
                                         <Box onClick={() => handleOpen(details)} sx={{
                                             overflow: "hidden",
@@ -145,6 +150,8 @@ function DisplayMsg() {
                                                     md: 15,
                                                     lg: 17,
                                                 },
+                                                fontWeight:600,
+                                                width: 180,
 
                                             }} style={{ width: 200 }} id="from">{details.from}</Typography>
                                             <Typography sx={{
@@ -153,25 +160,25 @@ function DisplayMsg() {
                                                     sm: 11,
                                                     md: 15,
                                                     lg: 17,
-                                                }
-                                            }} style={{ width: 200 }} id="subject">{details.subject}</Typography>
+                                                },
+                                                fontWeight:"bold",
+                                                width: 180,
+                                                textOverflow: "ellipsis",
+                                                overflow: "hidden"
+                                            }} id="subject">{details.subject}</Typography>
                                             <Typography sx={{
                                                 fontSize: {
                                                     xs: 8,
                                                     sm: 11,
                                                     md: 15,
                                                     lg: 17,
-                                                }
-                                            }} style={{ width: 200 }} id="message">{details.message}</Typography>
+                                                },
+                                                width: 180,
+                                                textOverflow: "ellipsis",
+                                                overflow: " hidden"
+                                            }} id="message">{details.message}</Typography>
                                         </Box>
-                                        <Button onClick={() => handleDelete(details)}><DeleteIcon sx={{
-                                            size: {
-                                                xs: "small",
-                                                sm: "small",
-                                                md: "medium",
-                                                lg: "large",
-                                            }
-                                        }} color='inherit' /></Button>
+                                        <Button onClick={() => handleDelete(details)}><DeleteIcon color='inherit'/></Button>
                                     </table>
                                 </Tooltip>
                             </div>

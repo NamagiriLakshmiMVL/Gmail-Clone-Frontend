@@ -12,6 +12,9 @@ import Modal from '@mui/material/Modal';
 import { Avatar } from '@mui/material';
 import { deepOrange } from '@mui/material/colors';
 import CloseIcon from '@mui/icons-material/Close';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import { toast } from 'react-toastify';
+
 
 const style = {
     position: 'absolute',
@@ -53,29 +56,76 @@ export function Star() {
         axios.post(`${API}/gmail/getting-star`, result)
             .then((res) => setSent(res.data))
     }, [])
-    const handleDelete = (val) =>{
-        setSent(sent.filter((item)=>item._id !== val._id))
+    const handleDelete = (val) => {
+        setSent(sent.filter((item) => item._id !== val._id))
+        toast.success("Deleted Successfully",{
+            position:"top-center",
+            autoClose:1000
+        })
     }
-
+    function refreshPage() {
+        window.location.reload(false);
+    }
     const avatar = localStorage.getItem("email")
     return (
         <div>
             <TopBar />
             <div style={{ display: "flex" }}>
                 <Navbar />
-                <div style={{ marginLeft: "80px", marginTop: "60px" }}>
-                    {sent.map((val,ind) => {
+                <div style={{ marginLeft: "80px", marginTop: "20px" }}>
+                    <Tooltip title="Refresh to see the new Data"><Button onClick={refreshPage} ><RefreshIcon /></Button></Tooltip>
+
+                    {sent.map((val, ind) => {
                         return (
                             <div className='displaymsg-root'>
                                 <Tooltip title={val.message}>
                                     <table className="displaymsg" style={{ width: "130%", cursor: "pointer", backgroundColor: "lightgray" }}>
                                         <Checkbox size='small' />
                                         <Button> <StarIcon fontSize='small' style={{ marginRight: 10 }} /></Button>
-                                        <Box onClick={() => handleOpen(val)} sx={{display:"flex"}}>
+                                        <Box onClick={() => handleOpen(val)} sx={{
+                                            overflow: "hidden",
+                                            display: "flex", width: {
+                                                xs: 100,
+                                                sm: 200,
+                                                md: 300,
+                                                lg: 500
+                                            }
+                                        }}>
 
-                                        <Typography style={{ width: 200 }}>{val.to}</Typography>
-                                        <Typography style={{ width: 200 }}>{val.subject}</Typography>
-                                        <Typography style={{ width: 200 }}>{val.message}</Typography>
+                                            <Typography sx={{
+                                                fontSize: {
+                                                    xs: 10,
+                                                    sm: 11,
+                                                    md: 15,
+                                                    lg: 17,
+                                                },
+                                                fontWeight: 600,
+                                                width: 180,
+
+                                            }} style={{ width: 200 }}>{val.to}</Typography>
+                                            <Typography sx={{
+                                                fontSize: {
+                                                    xs: 8,
+                                                    sm: 11,
+                                                    md: 15,
+                                                    lg: 17,
+                                                },
+                                                fontWeight: "bold",
+                                                width: 180,
+                                                textOverflow: "ellipsis",
+                                                overflow: "hidden"
+                                            }} style={{ width: 200 }}>{val.subject}</Typography>
+                                            <Typography sx={{
+                                                fontSize: {
+                                                    xs: 8,
+                                                    sm: 11,
+                                                    md: 15,
+                                                    lg: 17,
+                                                },
+                                                width: 180,
+                                                textOverflow: "ellipsis",
+                                                overflow: " hidden"
+                                            }} style={{ width: 200 }}>{val.message}</Typography>
                                         </Box>
                                         <Button onClick={() => handleDelete(val)}><DeleteIcon color='inherit' /></Button>
 
@@ -89,7 +139,7 @@ export function Star() {
                 </div>
             </div>
             <div>
-            <Modal
+                <Modal
                     open={open}
                     onClose={handleClose}
                     aria-labelledby="modal-modal-title"
