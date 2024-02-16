@@ -34,7 +34,7 @@ function CreateAccountGmail() {
 
     return (
         <div>
-            {loader === true && <CircularProgress sx={{ marginLeft: "700px" }} />}
+            {loader === true && <CircularProgress sx={{ marginLeft: { xs: 13, sm: 200, md: 700 } }} />}
             <Box sx={{ textAlign: "center", marginTop: "80px" }}>
 
                 <form id="password" onSubmit={(e) => handleSubmit(e)}>

@@ -132,14 +132,14 @@ export default function SideBar() {
                             <h2>New Message</h2>
                             <CloseIcon style={{ cursor: "pointer" }} onClick={() => setOpen(false)} />
                         </div>
-                        <TextField id="afrom" label="From" name='from' value={from} style={{ width: "100%" }} />
+                        <TextField required id="afrom" label="From" name='from' value={from} style={{ width: "100%" }} />
                         <br /><br />
-                        <TextField id="ato" label="To" name='to' style={{ width: "100%" }} />
+                        <TextField  required id="ato" label="To" name='to' style={{ width: "100%" }} />
                         <br /><br />
-                        <TextField id='asubject' label="Subject" name='subject' style={{ width: "100%" }} />
+                        <TextField required id='asubject' label="Subject" name='subject' style={{ width: "100%" }} />
                         <br /><br />
 
-                        <TextField id='amessage' label="Message" name='message' style={{ width: "100%" }} />
+                        <TextField required id='amessage' label="Message" name='message' style={{ width: "100%" }} />
                         <br /><br />
 
                         <Button type="submit" variant="contained" onClick={() => sendhandler()}>Send</Button>

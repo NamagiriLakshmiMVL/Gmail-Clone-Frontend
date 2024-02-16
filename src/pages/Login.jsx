@@ -41,7 +41,7 @@ function Login() {
     return (
         <div>
 
-            {loader === true && <CircularProgress sx={{ marginLeft: "700px" }} />}
+            {loader === true && <CircularProgress sx={{ marginLeft: { xs: 13, sm: 200, md: 700 } }} />}
             <Box sx={{ textAlign: "center", marginTop: "60px" }}>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <Typography sx={{ fontSize: { xs: "20px", sm: "30px", md: "35px" }, marginLeft: { xs: "50px", sm: "300px", md: "600px" } }}>Google</Typography>

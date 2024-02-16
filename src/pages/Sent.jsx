@@ -40,7 +40,14 @@ const style1 = {
     height: 300
 
 }
+const style2 = {
+    overflow: "scroll",
+    textindent: "50px",
+    border: "1px solid #808080",
+    bgcolor: "#D0D0D0",
+    height: {xs:100,sm:150,md:200}
 
+}
 export function Sent() {
 
     const dispatch = useDispatch()
@@ -184,12 +191,12 @@ export function Sent() {
 
                         </div>
                         <Box sx={{ backgroundColor: "#C0C0C0", marginTop: "20px" }}>
-                            <Typography id="modal-modal-description" variant="h6" component="h2">
+                            <Typography id="modal-modal-description" variant="h6" component="h2" sx={style1}>
                                 Sub: <b>{modal.subject}</b>
                             </Typography>
                         </Box>
                         <br /><br />
-                        <Typography id="modal-modal-title" variant="h6" component="h2" sx={style1}>
+                        <Typography id="modal-modal-title" variant="h6" component="h2" sx={style2}>
                             {modal.message}
                         </Typography>
                         <br />
