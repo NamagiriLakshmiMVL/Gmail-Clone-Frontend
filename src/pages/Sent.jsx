@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Button, Checkbox, Tooltip, Typography } from '@mui/material';
+import { Button, Checkbox, Tooltip, Typography,Table } from '@mui/material';
 import { API } from '../API';
 import { TopBar } from './TopBar';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
@@ -24,7 +24,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 900,
+    width: { xs: 250, sm: 600, md: 800 },
     height: 500,
     bgcolor: 'background.paper',
     border: '2px solid #000',
@@ -97,80 +97,67 @@ export function Sent() {
 
     return (
         <div>
-            <TopBar />
-            <div style={{ display: "flex" }}>
-                <Navbar />
-                <div style={{ marginLeft: "80px", marginTop: "20px" }}>
-                    <Tooltip title="Refresh to see the new Data"><Button onClick={refreshPage} ><RefreshIcon /></Button></Tooltip>
-                    <Button onClick={handleMultiple}><DeleteIcon /></Button>
-                    {sent.map((val) => {
-                        return (
-                            <div className='displaymsg-root'>
-                                <Tooltip title={val.message}>
-                                    <table className="displaymsg" style={{ width: "110%", cursor: "pointer", backgroundColor: "lightgray" }} >
-                                        <Checkbox size='small' onChange={() => {
-                                            if (check.includes(val._id)) {
-                                                setCheck(prev => prev.filter(ele => ele !== val._id))
-                                            } else {
-                                                setCheck(prev => [...prev, val._id])
-                                            }
-                                        }} checked={check.includes(val._id)} />
-                                        <Button onClick={() => handleStar(val._id)}> {star.includes(val._id) ? <StarIcon /> : <StarBorderIcon />}</Button>
-                                        <Box onClick={() => handleOpen(val)} sx={{
-                                            overflow: "hidden",
-                                            display: "flex", width: {
-                                                xs: 100,
-                                                sm: 200,
-                                                md: 300,
-                                                lg: 500
-                                            }
-                                        }}>
-                                            <Typography sx={{
-                                                fontSize: {
-                                                    xs: 10,
-                                                    sm: 11,
-                                                    md: 15,
-                                                    lg: 17,
-                                                },
-                                                fontWeight:600,
-                                                width: 180,
-                                               
-                                            }} >{val.to}</Typography>
-                                            <Typography sx={{
-                                                fontSize: {
-                                                    xs: 8,
-                                                    sm: 11,
-                                                    md: 15,
-                                                    lg: 17,
-                                                },
-                                                fontWeight:"bold",
-                                                width: 180,
-                                                textOverflow: "ellipsis",
-                                                overflow: "hidden"
-                                            }} >{val.subject}</Typography>
-                                            <Typography sx={{
-                                                fontSize: {
-                                                    xs: 8,
-                                                    sm: 11,
-                                                    md: 15,
-                                                    lg: 17,
-                                                },
-                                                width: 180,
-                                                textOverflow: "ellipsis",
-                                                overflow: " hidden"
-                                            }} >{val.message}</Typography>
-                                        </Box>
-                                        <Button onClick={() => handleDelete(val)}><DeleteIcon color='inherit' /></Button>
+            <Box> <TopBar /> </Box>
+            <Box sx={{ display: "flex" }}>
+                <Box sx={{ display: { xs: "none", sm: "flex", md: "flex" } }}><Navbar /></Box>
+                <Box>
+                    <Box sx={{ marginLeft: { xs: "0px", sm: "80px", md: "100px" }, marginTop: "20px", display: "flex" }}>
 
-                                    </table>
-                                </Tooltip>
+                        <Tooltip title="Refresh to see the new Data"><Button onClick={refreshPage} ><RefreshIcon /></Button></Tooltip>
+                        <Button onClick={handleMultiple}><DeleteIcon /></Button>
+
+                    </Box>
+                    <Box>
+                        {sent.map((val) => {
+                            return (
+                                <Box sx={{ marginTop: "30px" }}>
+                                    <Tooltip title={val.message}>
+                                        <Table sx={{ marginLeft: { xs: "0px", sm: "80px", md: "100px" }, border: "1px solid black", display: "flex", alignItems: "center", width: { xs: "100%", sm: "100%", md: "80%" }, cursor: "pointer", backgroundColor: "lightgray" }} >
+                                            <Checkbox size='small' onChange={() => {
+                                                if (check.includes(val._id)) {
+                                                    setCheck(prev => prev.filter(ele => ele !== val._id))
+                                                } else {
+                                                    setCheck(prev => [...prev, val._id])
+                                                }
+                                            }} checked={check.includes(val._id)} />
+                                            <Button onClick={() => handleStar(val._id)}> {star.includes(val._id) ? <StarIcon /> : <StarBorderIcon />}</Button>
+                                            <Box onClick={() => handleOpen(val)} sx={{
+                                                overflow: "hidden",
+                                                display: "flex", width: { xs: 100, sm: 200, md: 300, lg: 500 }
+                                            }}>
+                                                <Typography sx={{
+                                                    fontSize: { xs: 10, sm: 11, md: 15, lg: 17, },
+                                                    fontWeight: 600,
+                                                    width: 180,
+
+                                                }} >{val.to}</Typography>
+                                                <Typography sx={{
+                                                    fontSize: { xs: 8, sm: 11, md: 15, lg: 17, },
+                                                    fontWeight: "bold",
+                                                    width: 180,
+                                                    textOverflow: "ellipsis",
+                                                    overflow: "hidden",
+                                                    marginLeft: "40px",
+                                                }}>{val.subject}</Typography>
+                                                <Typography sx={{
+                                                    fontSize: { xs: 8, sm: 11, md: 15, lg: 17 },
+                                                    width: 180,
+                                                    textOverflow: "ellipsis",
+                                                    overflow: " hidden",
+                                                }} >{val.message}</Typography>
+                                            </Box>
+                                            <Button onClick={() => handleDelete(val)}><DeleteIcon color='inherit' /></Button>
+
+                                        </Table>
+                                    </Tooltip>
 
 
-                            </div>
-                        )
-                    })}
-                </div>
-            </div>
+                                </Box>
+                            )
+                        })}
+                    </Box>
+                </Box >
+            </Box>
             <div>
                 <Modal
                     open={open}
@@ -215,6 +202,6 @@ export function Sent() {
 
                 </Modal>
             </div>
-        </div>
+        </div >
     )
 }

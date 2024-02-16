@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Button, Checkbox, Tooltip, Typography } from '@mui/material';
+import { Button, Checkbox, Tooltip, Typography, Table } from '@mui/material';
 import { API } from '../API';
 import { useSelector } from 'react-redux';
 import { TopBar } from './TopBar';
@@ -21,7 +21,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 900,
+    width: { xs: 250, sm: 600, md: 800 },
     height: 500,
     bgcolor: 'background.paper',
     border: '2px solid #000',
@@ -58,9 +58,9 @@ export function Star() {
     }, [])
     const handleDelete = (val) => {
         setSent(sent.filter((item) => item._id !== val._id))
-        toast.success("Deleted Successfully",{
-            position:"top-center",
-            autoClose:1000
+        toast.success("Deleted Successfully", {
+            position: "top-center",
+            autoClose: 1000
         })
     }
     function refreshPage() {
@@ -69,75 +69,60 @@ export function Star() {
     const avatar = localStorage.getItem("email")
     return (
         <div>
-            <TopBar />
-            <div style={{ display: "flex" }}>
-                <Navbar />
-                <div style={{ marginLeft: "80px", marginTop: "20px" }}>
-                    <Tooltip title="Refresh to see the new Data"><Button onClick={refreshPage} ><RefreshIcon /></Button></Tooltip>
+            <Box> <TopBar /> </Box>
+            <Box sx={{ display: "flex" }}>
+                <Box sx={{ display: { xs: "none", sm: "flex", md: "flex" } }}><Navbar /></Box>
+                <Box>
+                    <Box sx={{ marginLeft: { xs: "0px", sm: "80px", md: "100px" }, marginTop: "20px", display: "flex" }}>
 
-                    {sent.map((val, ind) => {
-                        return (
-                            <div className='displaymsg-root'>
-                                <Tooltip title={val.message}>
-                                    <table className="displaymsg" style={{ width: "130%", cursor: "pointer", backgroundColor: "lightgray" }}>
-                                        <Checkbox size='small' />
-                                        <Button> <StarIcon fontSize='small' style={{ marginRight: 10 }} /></Button>
-                                        <Box onClick={() => handleOpen(val)} sx={{
-                                            overflow: "hidden",
-                                            display: "flex", width: {
-                                                xs: 100,
-                                                sm: 200,
-                                                md: 300,
-                                                lg: 500
-                                            }
-                                        }}>
+                        <Tooltip title="Refresh to see the new Data"><Button onClick={refreshPage} ><RefreshIcon /></Button></Tooltip>
+                    </Box>
+                    <Box>
+                        {sent.map((val, ind) => {
+                            return (
+                                <Box sx={{ marginTop: "30px" }}>
+                                    <Tooltip title={val.message}>
+                                    <Table sx={{ marginLeft: { xs: "0px", sm: "80px", md: "100px" }, border: "1px solid black", display: "flex", alignItems: "center", width: { xs: "100%", sm: "100%", md: "80%" }, cursor: "pointer", backgroundColor: "lightgray" }} >
+                                            <Checkbox size='small' />
+                                            <Button> <StarIcon fontSize='small' style={{ marginRight: 10 }} /></Button>
+                                            <Box onClick={() => handleOpen(val)} sx={{
+                                                overflow: "hidden",
+                                                display: "flex", width: { xs: 100, sm: 200, md: 300, lg: 500 }
+                                            }}>
 
-                                            <Typography sx={{
-                                                fontSize: {
-                                                    xs: 10,
-                                                    sm: 11,
-                                                    md: 15,
-                                                    lg: 17,
-                                                },
-                                                fontWeight: 600,
-                                                width: 180,
+                                                <Typography sx={{
+                                                    fontSize: { xs: 10, sm: 11, md: 15, lg: 17, },
+                                                    fontWeight: 600,
+                                                    width: 180,
 
-                                            }} style={{ width: 200 }}>{val.to}</Typography>
-                                            <Typography sx={{
-                                                fontSize: {
-                                                    xs: 8,
-                                                    sm: 11,
-                                                    md: 15,
-                                                    lg: 17,
-                                                },
-                                                fontWeight: "bold",
-                                                width: 180,
-                                                textOverflow: "ellipsis",
-                                                overflow: "hidden"
-                                            }} style={{ width: 200 }}>{val.subject}</Typography>
-                                            <Typography sx={{
-                                                fontSize: {
-                                                    xs: 8,
-                                                    sm: 11,
-                                                    md: 15,
-                                                    lg: 17,
-                                                },
-                                                width: 180,
-                                                textOverflow: "ellipsis",
-                                                overflow: " hidden"
-                                            }} style={{ width: 200 }}>{val.message}</Typography>
-                                        </Box>
-                                        <Button onClick={() => handleDelete(val)}><DeleteIcon color='inherit' /></Button>
+                                                }} style={{ width: 200 }}>{val.to}</Typography>
+                                                <Typography sx={{
+                                                    marginLeft: "40px",
+                                                    fontSize: { xs: 8, sm: 11, md: 15, lg: 17, },
+                                                    fontWeight: "bold",
+                                                    width: 180,
+                                                    textOverflow: "ellipsis",
+                                                    overflow: "hidden"
+                                                }} style={{ width: 200 }}>{val.subject}</Typography>
+                                                <Typography sx={{
+                                                    fontSize: { xs: 8, sm: 11, md: 15, lg: 17 },
+                                                    width: 180,
+                                                    textOverflow: "ellipsis",
+                                                    overflow: " hidden",
+                                                }} style={{ width: 200 }}>{val.message}</Typography>
+                                            </Box>
+                                            <Button onClick={() => handleDelete(val)}><DeleteIcon color='inherit' /></Button>
 
-                                    </table>
-                                </Tooltip>
+                                        </Table>
+                                    </Tooltip>
 
 
-                            </div>
-                        )
-                    })}
-                </div>
-            </div>
+                                </Box>
+                            )
+                        })}
+                    </Box>
+                </Box>
+            </Box>
             <div>
                 <Modal
                     open={open}

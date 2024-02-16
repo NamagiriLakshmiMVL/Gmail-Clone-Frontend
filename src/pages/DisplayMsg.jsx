@@ -17,12 +17,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import { toast } from 'react-toastify';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
+
 const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 900,
+    width: { xs: 250, sm: 600, md: 800 },
     height: 500,
     bgcolor: 'background.paper',
     border: '2px solid #000',
@@ -111,12 +112,12 @@ function DisplayMsg() {
     const avatar = localStorage.getItem("email")
     return (
         <div>
+
             <Box> <TopBar /> </Box>
             <Box sx={{ display: "flex" }}>
-
-                <Box><Navbar /></Box>
+                <Box sx={{ display: { xs: "none", sm: "flex", md: "flex" } }}><Navbar /></Box>
                 <Box>
-                    <Box sx={{ marginLeft: { xs: "0px", sm: "300px", md: "300px" }, marginTop: "20px", display: "flex" }}>
+                    <Box sx={{ marginLeft: { xs: "0px", sm: "80px", md: "100px" }, marginTop: "20px", display: "flex" }}>
 
                         <Tooltip title="Refresh to see the new Data"><Button onClick={refreshPage} ><RefreshIcon /></Button></Tooltip>
                         <Button onClick={handleMultiple}><DeleteIcon /></Button>
@@ -128,7 +129,7 @@ function DisplayMsg() {
                                 <Box sx={{ marginTop: "30px" }}>
 
                                     <Tooltip title={details.message}>
-                                        <Table sx={{ marginLeft: { xs: "0px", sm: "300px", md: "300px" }, border: "1px solid black", display: "flex", alignItems: "center", width: { xs: "100%", sm: "60%", md: "80%" }, cursor: "pointer", backgroundColor: "lightgray" }} >
+                                        <Table sx={{ marginLeft: { xs: "0px", sm: "80px", md: "100px" }, border: "1px solid black", display: "flex", alignItems: "center", width: { xs: "100%", sm: "100%", md: "80%" }, cursor: "pointer", backgroundColor: "lightgray" }} >
                                             <Checkbox size='small' onChange={() => {
                                                 if (check.includes(details._id)) {
                                                     setCheck(prev => prev.filter(ele => ele !== details._id))
@@ -139,47 +140,27 @@ function DisplayMsg() {
                                             <Button onClick={() => handleStar(details._id)}> {star.includes(details._id) ? <StarIcon /> : <StarBorderIcon />}</Button>
                                             <Box onClick={() => handleOpen(details)} sx={{
                                                 overflow: "hidden",
-                                                display: "flex", width: {
-                                                    xs: 100,
-                                                    sm: 200,
-                                                    md: 300,
-                                                    lg: 500
-                                                }
+                                                display: "flex", width: { xs: 100, sm: 200, md: 300, lg: 500 }
                                             }}>
-
                                                 <Typography sx={{
-                                                    fontSize: {
-                                                        xs: 10,
-                                                        sm: 11,
-                                                        md: 15,
-                                                        lg: 17,
-                                                    },
+                                                    fontSize: { xs: 10, sm: 11, md: 15, lg: 17, },
                                                     fontWeight: 600,
                                                     width: 180,
 
-                                                }} style={{ width: 200 }} id="from">{details.from}</Typography>
+                                                }}>{details.from}</Typography>
                                                 <Typography sx={{
-                                                    fontSize: {
-                                                        xs: 8,
-                                                        sm: 11,
-                                                        md: 15,
-                                                        lg: 17,
-                                                    },
+                                                    marginLeft:"40px",
+                                                    fontSize: { xs: 8, sm: 11, md: 15, lg: 17, },
                                                     fontWeight: "bold",
                                                     width: 180,
                                                     textOverflow: "ellipsis",
                                                     overflow: "hidden"
                                                 }} id="subject">{details.subject}</Typography>
                                                 <Typography sx={{
-                                                    fontSize: {
-                                                        xs: 8,
-                                                        sm: 11,
-                                                        md: 15,
-                                                        lg: 17,
-                                                    },
+                                                    fontSize: {xs: 8,sm: 11, md: 15,  lg: 17},
                                                     width: 180,
                                                     textOverflow: "ellipsis",
-                                                    overflow: " hidden"
+                                                    overflow: " hidden",
                                                 }} id="message">{details.message}</Typography>
                                             </Box>
                                             <Button onClick={() => handleDelete(details)}><DeleteIcon color='inherit' /></Button>

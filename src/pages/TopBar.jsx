@@ -7,6 +7,8 @@ import axios from "axios";
 import { API } from "../API"
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
+import TemporaryDrawer from './Test';
+
 
 export function TopBar() {
     const [searchVal, setSearchVal] = useState("")
@@ -65,7 +67,7 @@ export function TopBar() {
             <Box sx={{ display: { xs: "block", sm: "flex", md: "flex", lg: "flex" }, justifyContent: { xs: "flex-start", sm: "space-between", md: "space-between" }, alignItems: "center" }
             }>
                 <Box sx={{ display: "flex" }}>
-                <Button><MenuIcon/></Button>
+                <Box sx={{ display: { xs: "flex", sm: "none", md: "none" } }}><TemporaryDrawer /></Box>
                     <Box
                         component="img"
                         sx={{
