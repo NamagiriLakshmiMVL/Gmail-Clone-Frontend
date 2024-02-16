@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Avatar, TextField } from '@mui/material';
+import { Avatar, TextField, Box, Typography, Button } from '@mui/material';
 import { deepOrange } from '@mui/material/colors';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import axios from "axios";
 import { API } from "../API"
 import SearchIcon from '@mui/icons-material/Search';
+import MenuIcon from '@mui/icons-material/Menu';
 
 export function TopBar() {
     const [searchVal, setSearchVal] = useState("")
@@ -61,20 +62,38 @@ export function TopBar() {
     }
     return (
         <div className='main-root'>
-            <div className='main-1'>
-                <img src='https://1000logos.net/wp-content/uploads/2021/05/Gmail-logo.png' alt='Email' width="70px" height="40px" />
-                <span style={{ color: "#5f6368", fontFamily: "sans-serif", fontSize: "25px", marginTop: "8px" }}>Gmail</span>
+            <Box sx={{ display: { xs: "block", sm: "flex", md: "flex", lg: "flex" }, justifyContent: { xs: "flex-start", sm: "space-between", md: "space-between" }, alignItems: "center" }
+            }>
+                <Box sx={{ display: "flex" }}>
+                <Button><MenuIcon/></Button>
+                    <Box
+                        component="img"
+                        sx={{
+                            height: 40,
+                            width: 70,
+                            maxHeight: { xs: 40, md: 40 },
+                            maxWidth: { xs: 70, md: 70 },
 
-            </div>
-            <div className='main-2'>
-                <SearchIcon />
-                <input type='text' style={{ fontSize: "20px", height: "2.5vw", width: "45vw", backgroundColor: "#E4EFFA", border: "none", outline: "none", borderRadius: "30px" }} onChange={(event) => handleChange(event)} />
+                        }}
+                        src='https://1000logos.net/wp-content/uploads/2021/05/Gmail-logo.png'
+                        alt='Email'
+                    />
+                    <Typography style={{ color: "#5f6368", fontFamily: "sans-serif", fontSize: "25px", marginTop: "8px" }}>Gmail</Typography>
+                </Box>
+                <Box sx={{ display: { xs: "flex", sm: "flex", md: "flex" }, alignItems: "center", justifyContent: { xs: "flex-start", sm: "space-between", md: "space-between" }, marginTop: { xs: "30px", sm: "0px", md: "0px" } }}>
+                    <Box sx={{ marginLeft: { xs: "0px", sm: "100px", md: "100px" }, }}><SearchIcon /></Box>
+                    <Box sx={{ width: { xs: "160px", sm: "300px", md: "500px" }, borderRadius: "50px", backgroundColor: "#E4EFFA" }}>
+                        <TextField id="outlined-basic" variant="outlined" sx={{ width: { xs: "160px", sm: "300px", md: "500px" } }} />
+
+                    </Box>
+                    <Box sx={{ marginLeft: "20px" }}>
+                        <Avatar sx={{ bgcolor: deepOrange[500] }}>{avatar[1]}</Avatar>
+                    </Box>
+                </Box>
 
 
-            </div>
-            <div style={{ marginLeft: "0px" }}>
-                <Avatar sx={{ bgcolor: deepOrange[500] }}>{avatar[1]}</Avatar>
-            </div>
+            </Box>
+
         </div>
     )
 }

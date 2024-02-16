@@ -62,6 +62,10 @@ export default function SideBar() {
                 position:"top-center",
                 autoClose: 1000,
             }))
+            .then(() => toast.info("Refresh to see new data",{
+                position:"top-center",
+                autoClose: 2000,
+            }))
             .then(() => setOpen(false))
     }
 

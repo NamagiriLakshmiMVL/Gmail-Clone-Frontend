@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { API } from '../API';
 import DeleteIcon from '@mui/icons-material/DeleteOutlineTwoTone';
-import { Button, Checkbox, Tooltip, Typography } from '@mui/material';
+import { Button, Checkbox, Table, Tooltip, Typography } from '@mui/material';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { star_message } from '../redux/starSlice';
 import { useDispatch } from 'react-redux';
@@ -16,8 +16,6 @@ import { deepOrange } from '@mui/material/colors';
 import CloseIcon from '@mui/icons-material/Close';
 import { toast } from 'react-toastify';
 import RefreshIcon from '@mui/icons-material/Refresh';
-
-
 
 const style = {
     position: 'absolute',
@@ -81,9 +79,11 @@ function DisplayMsg() {
         setOpen(true)
         setModal(val)
     };
+
     function refreshPage() {
         window.location.reload(false);
     }
+
     const handleDelete = async (id) => {
         const newdata = {
             id
@@ -111,84 +111,90 @@ function DisplayMsg() {
     const avatar = localStorage.getItem("email")
     return (
         <div>
-            <Box sx={{ display: { xs: "none", sm: "flex" } }}> <TopBar /></Box>
-            <div style={{ display: "flex" }} >
+            <Box> <TopBar /> </Box>
+            <Box sx={{ display: "flex" }}>
 
-                <Box sx={{ display: { xs: "none", md: "flex" } }}><Navbar /></Box>
+                <Box><Navbar /></Box>
+                <Box>
+                    <Box sx={{ marginLeft: { xs: "0px", sm: "300px", md: "300px" }, marginTop: "20px", display: "flex" }}>
 
-                <div style={{ marginLeft: "80px", marginTop: "20px" }}>
-                    <Tooltip title="Refresh to see the new Data"><Button onClick={refreshPage} ><RefreshIcon /></Button></Tooltip>
-                    <Button onClick={handleMultiple}><DeleteIcon /></Button>
-                    {message.map((details) => {
-                        return (
-                            <div className='displaymsg-root'>
+                        <Tooltip title="Refresh to see the new Data"><Button onClick={refreshPage} ><RefreshIcon /></Button></Tooltip>
+                        <Button onClick={handleMultiple}><DeleteIcon /></Button>
 
-                                <Tooltip title={details.message}>
-                                    <table className="displaymsg" style={{ width: "110%", cursor: "pointer", backgroundColor: "lightgray" }}>
-                                        <Checkbox size='small' onChange={() => {
-                                            if (check.includes(details._id)) {
-                                                setCheck(prev => prev.filter(ele => ele !== details._id))
-                                            } else {
-                                                setCheck(prev => [...prev, details._id])
-                                            }
-                                        }} checked={check.includes(details._id)} />
-                                        <Button onClick={() => handleStar(details._id)}> {star.includes(details._id) ? <StarIcon /> : <StarBorderIcon />}</Button>
-                                        <Box onClick={() => handleOpen(details)} sx={{
-                                            overflow: "hidden",
-                                            display: "flex", width: {
-                                                xs: 100,
-                                                sm: 200,
-                                                md: 300,
-                                                lg: 500
-                                            }
-                                        }}>
+                    </Box>
+                    <Box>
+                        {message.map((details) => {
+                            return (
+                                <Box sx={{ marginTop: "30px" }}>
 
-                                            <Typography sx={{
-                                                fontSize: {
-                                                    xs: 10,
-                                                    sm: 11,
-                                                    md: 15,
-                                                    lg: 17,
-                                                },
-                                                fontWeight:600,
-                                                width: 180,
+                                    <Tooltip title={details.message}>
+                                        <Table sx={{ marginLeft: { xs: "0px", sm: "300px", md: "300px" }, border: "1px solid black", display: "flex", alignItems: "center", width: { xs: "100%", sm: "60%", md: "80%" }, cursor: "pointer", backgroundColor: "lightgray" }} >
+                                            <Checkbox size='small' onChange={() => {
+                                                if (check.includes(details._id)) {
+                                                    setCheck(prev => prev.filter(ele => ele !== details._id))
+                                                } else {
+                                                    setCheck(prev => [...prev, details._id])
+                                                }
+                                            }} checked={check.includes(details._id)} />
+                                            <Button onClick={() => handleStar(details._id)}> {star.includes(details._id) ? <StarIcon /> : <StarBorderIcon />}</Button>
+                                            <Box onClick={() => handleOpen(details)} sx={{
+                                                overflow: "hidden",
+                                                display: "flex", width: {
+                                                    xs: 100,
+                                                    sm: 200,
+                                                    md: 300,
+                                                    lg: 500
+                                                }
+                                            }}>
 
-                                            }} style={{ width: 200 }} id="from">{details.from}</Typography>
-                                            <Typography sx={{
-                                                fontSize: {
-                                                    xs: 8,
-                                                    sm: 11,
-                                                    md: 15,
-                                                    lg: 17,
-                                                },
-                                                fontWeight:"bold",
-                                                width: 180,
-                                                textOverflow: "ellipsis",
-                                                overflow: "hidden"
-                                            }} id="subject">{details.subject}</Typography>
-                                            <Typography sx={{
-                                                fontSize: {
-                                                    xs: 8,
-                                                    sm: 11,
-                                                    md: 15,
-                                                    lg: 17,
-                                                },
-                                                width: 180,
-                                                textOverflow: "ellipsis",
-                                                overflow: " hidden"
-                                            }} id="message">{details.message}</Typography>
-                                        </Box>
-                                        <Button onClick={() => handleDelete(details)}><DeleteIcon color='inherit'/></Button>
-                                    </table>
-                                </Tooltip>
-                            </div>
-                        )
-                    })}
-                </div>
-            </div>
+                                                <Typography sx={{
+                                                    fontSize: {
+                                                        xs: 10,
+                                                        sm: 11,
+                                                        md: 15,
+                                                        lg: 17,
+                                                    },
+                                                    fontWeight: 600,
+                                                    width: 180,
 
-            <div>
+                                                }} style={{ width: 200 }} id="from">{details.from}</Typography>
+                                                <Typography sx={{
+                                                    fontSize: {
+                                                        xs: 8,
+                                                        sm: 11,
+                                                        md: 15,
+                                                        lg: 17,
+                                                    },
+                                                    fontWeight: "bold",
+                                                    width: 180,
+                                                    textOverflow: "ellipsis",
+                                                    overflow: "hidden"
+                                                }} id="subject">{details.subject}</Typography>
+                                                <Typography sx={{
+                                                    fontSize: {
+                                                        xs: 8,
+                                                        sm: 11,
+                                                        md: 15,
+                                                        lg: 17,
+                                                    },
+                                                    width: 180,
+                                                    textOverflow: "ellipsis",
+                                                    overflow: " hidden"
+                                                }} id="message">{details.message}</Typography>
+                                            </Box>
+                                            <Button onClick={() => handleDelete(details)}><DeleteIcon color='inherit' /></Button>
+                                        </Table>
+                                    </Tooltip>
+                                </Box>
 
+                            )
+                        })}
+                    </Box>
+                </Box>
+
+            </Box>
+
+            <div >
                 <Modal
                     open={open}
                     onClose={handleClose}
@@ -231,7 +237,7 @@ function DisplayMsg() {
 
 
                 </Modal>
-            </div>
+            </div >
         </div >
     )
 }
