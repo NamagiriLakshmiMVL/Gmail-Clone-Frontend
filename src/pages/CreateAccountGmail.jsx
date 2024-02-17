@@ -11,10 +11,8 @@ function CreateAccountGmail() {
         e.preventDefault()
         const data = new FormData(e.target);
         const gmail = data.get("gmail")
-        const newUserGmail = {
-            gmail
-        }
-        localStorage.setItem("user_details", JSON.stringify(newUserGmail))
+        
+        localStorage.setItem("email", JSON.stringify(gmail))
 
         dispatch(new_user(["email", gmail]))
         navigate("/creating-user/password")
