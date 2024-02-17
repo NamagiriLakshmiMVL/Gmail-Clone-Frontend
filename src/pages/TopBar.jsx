@@ -40,9 +40,12 @@ export function TopBar() {
                 </Box>
                 <Box sx={{ display: { xs: "flex", sm: "flex", md: "flex" }, alignItems: "center", justifyContent: { xs: "flex-start", sm: "space-between", md: "space-between" }, marginTop: { xs: "30px", sm: "0px", md: "0px" } }}>
                     <Button sx={{ marginLeft: { xs: "0px", sm: "100px", md: "100px" } }} ><SearchIcon /></Button>
-                    <Box sx={{width: { xs: "160px", sm: "300px", md: "500px" }, borderRadius: "50px", backgroundColor: "#E4EFFA" }}>
-                        <TextField style={{height:"50px"}} placeholder="Search In Emails"onChange={(e) => handleChange(e)} id="outlined-basic" variant="standard" sx={{ width: { xs: "160px", sm: "300px", md: "500px" } }} InputProps={{
+                    <Box sx={{ width: { xs: "160px", sm: "300px", md: "500px" }, borderRadius: "50px", backgroundColor: "#E4EFFA" }}>
+                        <TextField placeholder="Search In Emails" onChange={(e) => handleChange(e)} id="outlined-basic" variant="standard" sx={{ width: { xs: "160px", sm: "300px", md: "500px" } }} InputProps={{
                             disableUnderline: true,
+                            style: {
+                                height: "50px",
+                            }
                         }} />
 
                     </Box>
