@@ -70,7 +70,7 @@ export function Sent() {
     useEffect(() => {
         axios.post(`${API}/gmail/getting-sent`, result)
             .then((res) => setSent(res.data))
-    }, [removedata])
+    }, [removedata,data])
     const handleMultiple = async () => {
         const check1 = {
             _id: check
@@ -111,7 +111,7 @@ export function Sent() {
                 <Box>
                     <Box sx={{ marginLeft: { xs: "0px", sm: "80px", md: "100px" }, marginTop: "20px", display: "flex" }}>
 
-                        <Tooltip title="Refresh to see the new Data"><Button onClick={refreshPage} ><RefreshIcon /></Button></Tooltip>
+                        <Tooltip title="Refresh to see the new Data"><Button onClick={()=>setRemovedata(prev => !prev)} ><RefreshIcon /></Button></Tooltip>
                         <Button onClick={handleMultiple}><DeleteIcon /></Button>
 
                     </Box>

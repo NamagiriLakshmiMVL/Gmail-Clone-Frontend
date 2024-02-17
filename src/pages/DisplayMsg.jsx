@@ -72,7 +72,7 @@ function DisplayMsg() {
                 setMessage(res.data)
                 
             })
-    }, [remove, removedata,sample])
+    }, [remove, removedata,data])
 
 
     const handleMultiple = async () => {

@@ -16,7 +16,7 @@ export function TopBar() {
     const handleChange = async (event) => {
         setSearchVal(event.target.value)
         dispatch(search_message(event.target.value))
-       
+
     }
     return (
         <div className='main-root'>
@@ -39,9 +39,11 @@ export function TopBar() {
                     <Typography style={{ color: "#5f6368", fontFamily: "sans-serif", fontSize: "25px", marginTop: "8px" }}>Gmail</Typography>
                 </Box>
                 <Box sx={{ display: { xs: "flex", sm: "flex", md: "flex" }, alignItems: "center", justifyContent: { xs: "flex-start", sm: "space-between", md: "space-between" }, marginTop: { xs: "30px", sm: "0px", md: "0px" } }}>
-                    <Button  sx={{ marginLeft: { xs: "0px", sm: "100px", md: "100px" } }} ><SearchIcon /></Button>
-                    <Box sx={{ width: { xs: "160px", sm: "300px", md: "500px" }, borderRadius: "50px", backgroundColor: "#E4EFFA" }}>
-                        <TextField onChange={(e) => handleChange(e)} id="outlined-basic" variant="outlined" sx={{ outline: "none", width: { xs: "160px", sm: "300px", md: "500px" } }} />
+                    <Button sx={{ marginLeft: { xs: "0px", sm: "100px", md: "100px" } }} ><SearchIcon /></Button>
+                    <Box sx={{width: { xs: "160px", sm: "300px", md: "500px" }, borderRadius: "50px", backgroundColor: "#E4EFFA" }}>
+                        <TextField style={{height:"50px"}} placeholder="Search In Emails"onChange={(e) => handleChange(e)} id="outlined-basic" variant="standard" sx={{ width: { xs: "160px", sm: "300px", md: "500px" } }} InputProps={{
+                            disableUnderline: true,
+                        }} />
 
                     </Box>
                     <Box sx={{ marginLeft: "20px" }}>
