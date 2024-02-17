@@ -13,6 +13,7 @@ function CreateAccountGmail() {
     const [password, setPassword] = useState("")
 
     const user = useSelector((state) => state.userSlice.userDetails)
+    
     const handleSubmit = async (e) => {
         e.preventDefault()
         const result = {
@@ -22,10 +23,12 @@ function CreateAccountGmail() {
         await setLoader(true)
         await axios.post(`${API}/creating-user/password`, result)
             .then((res) => {
-                { res.data === "Created User Successfully" ? navigate("/gmail/display-msg") : toast.error(res.data, {
-                    position: "top-center",
-                    autoClose: 1000,
-                }) }
+                {
+                    res.data === "Created User Successfully" ? navigate("/gmail/display-msg") : toast.error(res.data, {
+                        position: "top-center",
+                        autoClose: 1000,
+                    })
+                }
 
             })
             .catch((err) => console.log(err))
@@ -34,7 +37,7 @@ function CreateAccountGmail() {
 
     return (
         <div>
-            {loader === true && <CircularProgress sx={{ marginLeft: { xs: 13, sm: 200, md: 700 } }} />}
+            {loader === true && <CircularProgress sx={{ marginLeft: { xs: 13, sm: 50, md: 85 } }} />}
             <Box sx={{ textAlign: "center", marginTop: "80px" }}>
 
                 <form id="password" onSubmit={(e) => handleSubmit(e)}>

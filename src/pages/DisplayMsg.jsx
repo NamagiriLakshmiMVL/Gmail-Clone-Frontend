@@ -5,7 +5,7 @@ import DeleteIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import { Button, Checkbox, Table, Tooltip, Typography } from '@mui/material';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { star_message } from '../redux/starSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import StarIcon from '@mui/icons-material/Star';
 import { TopBar } from './TopBar';
 import Navbar from './Navbar';
@@ -56,15 +56,23 @@ function DisplayMsg() {
     const [star, setStar] = useState([])
     const [modal, setModal] = useState([])
     const items = JSON.parse(localStorage.getItem('email'));
-    const result = { items }
+    console.log("items",items)
+    const [sample, setSample] = useState([])
+    const data = useSelector((state) => state.searchSlice.searchMessage)
+    const result = { items,data }
+    console.log(result)
+   
 
+    console.log(data)
     useEffect(() => {
+        
         console.log("useEffect fired");
         axios.post(`${API}/gmail/getting-msg`, result)
             .then((res) => {
                 setMessage(res.data)
+                
             })
-    }, [remove, removedata])
+    }, [remove, removedata,sample])
 
 
     const handleMultiple = async () => {
@@ -118,7 +126,7 @@ function DisplayMsg() {
     const avatar = localStorage.getItem("email")
     return (
         <div>
-
+            
             <Box> <TopBar /> </Box>
             <Box sx={{ display: "flex" }}>
                 <Box sx={{ display: { xs: "none", sm: "flex", md: "flex" } }}><Navbar /></Box>
@@ -143,7 +151,7 @@ function DisplayMsg() {
                                                     setCheck(prev => [...prev, details._id])
                                                 }
                                             }} checked={check.includes(details._id)} />
-                                            <Button sx={{ marginLeft:{xs:0,sm:0,md:0},width: { xs: 30, sm: 100, md: 100 } }} onClick={() => handleStar(details._id)}> {star.includes(details._id) ? <StarIcon /> : <StarBorderIcon />}</Button>
+                                            <Button sx={{ marginLeft: { xs: 0, sm: 0, md: 0 }, width: { xs: 30, sm: 100, md: 100 } }} onClick={() => handleStar(details._id)}> {star.includes(details._id) ? <StarIcon /> : <StarBorderIcon />}</Button>
                                             <Box onClick={() => handleOpen(details)} sx={{
                                                 overflow: "hidden",
                                                 display: "flex", width: { xs: 100, sm: 200, md: 300, lg: 500 }

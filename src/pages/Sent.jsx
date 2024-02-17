@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Button, Checkbox, Tooltip, Typography,Table } from '@mui/material';
+import { Button, Checkbox, Tooltip, Typography, Table } from '@mui/material';
 import { API } from '../API';
 import { TopBar } from './TopBar';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
@@ -16,6 +16,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
 import { toast } from 'react-toastify';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import { useSelector } from 'react-redux';
+
 
 
 
@@ -45,7 +47,7 @@ const style2 = {
     textindent: "50px",
     border: "1px solid #808080",
     bgcolor: "#D0D0D0",
-    height: {xs:100,sm:150,md:200}
+    height: { xs: 100, sm: 150, md: 200 }
 
 }
 export function Sent() {
@@ -62,10 +64,9 @@ export function Sent() {
     };
     const [sent, setSent] = useState([])
     const [star, setStar] = useState([])
-    const data = JSON.parse(localStorage.getItem("email"))
-    const result = {
-        data
-    }
+    const items = JSON.parse(localStorage.getItem("email"))
+    const data = useSelector((state) => state.searchSlice.searchMessage)
+    const result = { items, data }
     useEffect(() => {
         axios.post(`${API}/gmail/getting-sent`, result)
             .then((res) => setSent(res.data))

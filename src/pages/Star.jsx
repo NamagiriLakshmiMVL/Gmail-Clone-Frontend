@@ -49,6 +49,7 @@ export function Star() {
     const [sent, setSent] = useState([])
 
     const id = useSelector((state) => state.starSlice.starMessage)
+    console.log(id)
     const result = {
         id
     }
