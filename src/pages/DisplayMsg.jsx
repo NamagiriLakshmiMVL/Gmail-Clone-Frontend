@@ -200,7 +200,7 @@ function DisplayMsg() {
                     <Box sx={style}>
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                             <div style={{ display: "flex" }}>
-                                <Avatar sx={{ bgcolor: deepOrange[500] }}>{avatar[1]}</Avatar>
+                                <Avatar sx={{ bgcolor: deepOrange[500] }}>B</Avatar>
                                 <div style={{ marginLeft: "8px" }}>
                                     <Typography id="modal-modal-title" sx={{ fontSize: "16px" }}>
                                         <b>From:{modal.from}</b>
