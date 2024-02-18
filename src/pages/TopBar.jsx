@@ -43,6 +43,9 @@ export function TopBar() {
                     <Box sx={{width: { xs: "160px", sm: "300px", md: "500px" }, borderRadius: "50px", backgroundColor: "#E4EFFA" }}>
                         <TextField placeholder="Search In Emails"onChange={(e) => handleChange(e)} id="outlined-basic" variant="standard" sx={{height:"50px", width: { xs: "160px", sm: "300px", md: "500px" } }} InputProps={{
                             disableUnderline: true,
+                            style:{
+                                height:"50px"
+                            }
                         }} />
 
                     </Box>
