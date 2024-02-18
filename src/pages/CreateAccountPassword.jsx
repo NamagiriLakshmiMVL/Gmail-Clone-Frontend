@@ -1,4 +1,4 @@
-import { Box, Typography, Button, TextField, CircularProgress } from '@mui/material'
+import { Box, Typography, Button, TextField, CircularProgress, FormHelperText } from '@mui/material'
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
@@ -13,7 +13,7 @@ function CreateAccountGmail() {
     const [password, setPassword] = useState("")
 
     const user = useSelector((state) => state.userSlice.userDetails)
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         const result = {
@@ -45,7 +45,11 @@ function CreateAccountGmail() {
                     <Typography sx={{ fontSize: { xs: "10px", sm: "15px", md: "20px" }, marginLeft: { xs: "50px", sm: "300px", md: "600px" } }}>Create a Gmail Password</Typography>
                     <Typography sx={{ fontSize: { xs: "10px", sm: "15px", md: "20px" }, marginLeft: { xs: "50px", sm: "300px", md: "600px" } }}>Enter your Password</Typography>
                     <TextField sx={{ marginTop: "30px", marginLeft: { xs: "50px", sm: "300px", md: "600px" } }} label="Create a Gmail Password" id="pass" name='password' onChange={(e) => setPassword(e.target.value)} />
-                    <br /><br />
+                    <FormHelperText sx={{ marginLeft: { xs: "50px", sm: "300px", md: "600px" } }}>
+                        Password must contain: [0-9] , [a-z] , [A-Z] ,[@!#$%_&] 
+                    </FormHelperText>
+                    <br />
+                   
                     <Box sx={{ display: "flex", justifyContent: "space-between", gap: "5px", marginLeft: { xs: "50px", sm: "300px", md: "600px" } }}>
                         <Button sx={{ marginTop: "10px", marginBottom: "20px" }} onClick={() => navigate("/creating-user/gmail")} variant="contained" type='submit'>Back</Button>
                         <Button sx={{ marginTop: "10px", marginBottom: "20px" }} variant="contained" type='submit'  >Next</Button>
