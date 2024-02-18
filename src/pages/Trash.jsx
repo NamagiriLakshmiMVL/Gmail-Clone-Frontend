@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Checkbox, Tooltip, Typography,Box,Table } from '@mui/material';
+import { Checkbox, Tooltip, Typography, Box, Table } from '@mui/material';
 import { API } from '../API';
 import DeleteIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import { Button } from '@mui/material';
@@ -32,7 +32,7 @@ const style1 = {
     textindent: "50px",
     border: "1px solid #808080",
     bgcolor: "#D0D0D0",
-    height: 300
+    height: { xs: "fit-content", sm: 150, md: 150 }
 
 }
 const style2 = {
@@ -40,7 +40,8 @@ const style2 = {
     textindent: "50px",
     border: "1px solid #808080",
     bgcolor: "#D0D0D0",
-    height: {xs:100,sm:150,md:200}
+    height: { xs: 100, sm: 150, md: 150 }
+
 
 }
 export function Trash() {
@@ -124,26 +125,26 @@ export function Trash() {
                                                 display: "flex", width: { xs: 100, sm: 200, md: 300, lg: 500 }
                                             }}>
 
-                                            <Typography sx={{
-                                                fontSize: { xs: 10, sm: 11, md: 15, lg: 17, },
-                                                fontWeight: 600,
-                                                width: 180,
+                                                <Typography sx={{
+                                                    fontSize: { xs: 10, sm: 11, md: 15, lg: 17, },
+                                                    fontWeight: 600,
+                                                    width: 180,
 
-                                            }}>{val.to}</Typography>
-                                            <Typography sx={{
-                                                marginLeft: "40px",
-                                                fontSize: { xs: 8, sm: 11, md: 15, lg: 17, },
-                                                fontWeight: "bold",
-                                                width: 180,
-                                                textOverflow: "ellipsis",
-                                                overflow: "hidden"
-                                            }}>{val.subject}</Typography>
-                                            <Typography sx={{
-                                                fontSize: { xs: 8, sm: 11, md: 15, lg: 17 },
-                                                width: 180,
-                                                textOverflow: "ellipsis",
-                                                overflow: " hidden",
-                                            }}>{val.message}</Typography>
+                                                }}>{val.to}</Typography>
+                                                <Typography sx={{
+                                                    marginLeft: "40px",
+                                                    fontSize: { xs: 8, sm: 11, md: 15, lg: 17, },
+                                                    fontWeight: "bold",
+                                                    width: 180,
+                                                    textOverflow: "ellipsis",
+                                                    overflow: "hidden"
+                                                }}>{val.subject}</Typography>
+                                                <Typography sx={{
+                                                    fontSize: { xs: 8, sm: 11, md: 15, lg: 17 },
+                                                    width: 180,
+                                                    textOverflow: "ellipsis",
+                                                    overflow: " hidden",
+                                                }}>{val.message}</Typography>
                                             </Box>
                                             <Button onClick={() => handleDelete(val._id)}><DeleteIcon color='inherit' /></Button>
 
@@ -201,6 +202,7 @@ export function Trash() {
                 </Modal>
             </div >
 
-           
+
         </div>
-)}
+    )
+}

@@ -34,7 +34,8 @@ const style1 = {
     textindent: "50px",
     border: "1px solid #808080",
     bgcolor: "#D0D0D0",
-    height: 300
+    height: { xs: "fit-content", sm: 150, md: 150 }
+
 
 }
 const style2 = {
@@ -42,7 +43,7 @@ const style2 = {
     textindent: "50px",
     border: "1px solid #808080",
     bgcolor: "#D0D0D0",
-    height: {xs:100,sm:150,md:200}
+    height: { xs: 100, sm: 150, md: 150 }
 
 }
 export function Star() {
