@@ -19,6 +19,8 @@ import { API } from '../API'
 import { useNavigate } from 'react-router-dom';
 import { TextField } from '@mui/material';
 import { toast } from 'react-toastify';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -113,7 +115,11 @@ export default function SideBar() {
                 <nav aria-label="secondary mailbox folders">
                     <List>
                         <ListItem disablePadding>
+
                             <ListItemButton onClick={() => navigate("/info/getting-delete")} >
+                            <ListItemIcon>
+                                < DeleteOutlineIcon />
+                            </ListItemIcon>
                                 <ListItemText primary="Trash" />
                             </ListItemButton>
                         </ListItem>

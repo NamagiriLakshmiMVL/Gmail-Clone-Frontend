@@ -120,7 +120,7 @@ export function Sent() {
                             return (
                                 <Box sx={{ marginTop: "30px" }}>
                                     <Tooltip title={val.message}>
-                                        <Table sx={{ marginLeft: { xs: "0px", sm: "80px", md: "100px" }, border: "1px solid black", display: "flex", alignItems: "center", width: { xs: "100%", sm: "100%", md: "80%" }, cursor: "pointer", backgroundColor: "lightgray" }} >
+                                        <Table sx={{ marginLeft: { xs: "0px", sm: "80px", md: "100px" }, border: "1px solid black", display: "flex", alignItems: "center", width: { xs: "100%", sm: "100%", md: "100%" }, cursor: "pointer", backgroundColor: "lightgray" }} >
                                             <Checkbox size='small' onChange={() => {
                                                 if (check.includes(val._id)) {
                                                     setCheck(prev => prev.filter(ele => ele !== val._id))

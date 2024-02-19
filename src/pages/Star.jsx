@@ -72,9 +72,7 @@ export function Star() {
             autoClose: 1000
         })
     }
-    function refreshPage() {
-        window.location.reload(false);
-    }
+
     const avatar = localStorage.getItem("email")
     return (
         <div>
@@ -82,16 +80,13 @@ export function Star() {
             <Box sx={{ display: "flex" }}>
                 <Box sx={{ display: { xs: "none", sm: "flex", md: "flex" } }}><Navbar /></Box>
                 <Box>
-                    <Box sx={{ marginLeft: { xs: "0px", sm: "80px", md: "100px" }, marginTop: "20px", display: "flex" }}>
 
-                        <Tooltip title="Refresh to see the new Data"><Button onClick={refreshPage} ><RefreshIcon /></Button></Tooltip>
-                    </Box>
                     <Box>
                         {sent.map((val, ind) => {
                             return (
-                                <Box sx={{ marginTop: "30px" }}>
+                                <Box sx={{ marginTop: "60px" }}>
                                     <Tooltip title={val.message}>
-                                    <Table sx={{ marginLeft: { xs: "0px", sm: "80px", md: "100px" }, border: "1px solid black", display: "flex", alignItems: "center", width: { xs: "100%", sm: "100%", md: "80%" }, cursor: "pointer", backgroundColor: "lightgray" }} >
+                                        <Table sx={{ marginLeft: { xs: "0px", sm: "80px", md: "100px" }, border: "1px solid black", display: "flex", alignItems: "center", width: { xs: "100%", sm: "100%", md: "100%" }, cursor: "pointer", backgroundColor: "lightgray" }} >
                                             <Checkbox size='small' />
                                             <Button> <StarIcon fontSize='small' style={{ marginRight: 10 }} /></Button>
                                             <Box onClick={() => handleOpen(val)} sx={{

@@ -111,7 +111,7 @@ export function Trash() {
                             return (
                                 <Box sx={{ marginTop: "30px" }}>
                                     <Tooltip title={val.message}>
-                                        <Table sx={{ marginLeft: { xs: "0px", sm: "80px", md: "100px" }, border: "1px solid black", display: "flex", alignItems: "center", width: { xs: "270px", sm: "400px", md: "80%" }, cursor: "pointer", backgroundColor: "lightgray" }} >
+                                        <Table sx={{ marginLeft: { xs: "0px", sm: "80px", md: "100px" }, border: "1px solid black", display: "flex", alignItems: "center", width: { xs: "270px", sm: "400px", md: "100%" }, cursor: "pointer", backgroundColor: "lightgray" }} >
                                             <Checkbox size='small' onChange={() => {
                                                 if (check.includes(val._id)) {
                                                     setCheck(prev => prev.filter(ele => ele !== val._id))
@@ -119,7 +119,8 @@ export function Trash() {
                                                     setCheck(prev => [...prev, val._id])
                                                 }
                                             }} checked={check.includes(val._id)} />
-                                            <StarBorder fontSize='small' style={{ marginRight: 10 }} />
+                                            <Button>                                            <StarBorder fontSize='small' style={{ marginRight: 10 }} /></Button>
+
                                             <Box onClick={() => handleOpen(val)} sx={{
                                                 overflow: "hidden",
                                                 display: "flex", width: { xs: 100, sm: 200, md: 300, lg: 500 }

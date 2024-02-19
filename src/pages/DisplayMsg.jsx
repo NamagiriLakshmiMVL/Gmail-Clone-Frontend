@@ -56,23 +56,23 @@ function DisplayMsg() {
     const [star, setStar] = useState([])
     const [modal, setModal] = useState([])
     const items = JSON.parse(localStorage.getItem('email'));
-    console.log("items",items)
+    console.log("items", items)
     const [sample, setSample] = useState([])
     const data = useSelector((state) => state.searchSlice.searchMessage)
-    const result = { items,data }
+    const result = { items, data }
     console.log(result)
-   
+
 
     console.log(data)
     useEffect(() => {
-        
+
         console.log("useEffect fired");
         axios.post(`${API}/gmail/getting-msg`, result)
             .then((res) => {
                 setMessage(res.data)
-                
+
             })
-    }, [remove, removedata,data])
+    }, [remove, removedata, data])
 
 
     const handleMultiple = async () => {
@@ -126,7 +126,7 @@ function DisplayMsg() {
     const avatar = localStorage.getItem("email")
     return (
         <div>
-            
+
             <Box> <TopBar /> </Box>
             <Box sx={{ display: "flex" }}>
                 <Box sx={{ display: { xs: "none", sm: "flex", md: "flex" } }}><Navbar /></Box>
@@ -143,15 +143,17 @@ function DisplayMsg() {
                                 <Box sx={{ marginTop: "30px" }}>
 
                                     <Tooltip title={details.message}>
-                                        <Table sx={{ marginLeft: { xs: "0px", sm: "80px", md: "100px" }, border: "1px solid black", display: "flex", alignItems: "center", width: { xs: "100%", sm: "100%", md: "80%" }, cursor: "pointer", backgroundColor: "lightgray" }} >
-                                            <Checkbox sx={{ width: { xs: 30, sm: 100, md: 40 } }} size='small' onChange={() => {
-                                                if (check.includes(details._id)) {
-                                                    setCheck(prev => prev.filter(ele => ele !== details._id))
-                                                } else {
-                                                    setCheck(prev => [...prev, details._id])
-                                                }
-                                            }} checked={check.includes(details._id)} />
-                                            <Button sx={{ marginLeft: { xs: 0, sm: 0, md: 0 }, width: { xs: 30, sm: 100, md: 100 } }} onClick={() => handleStar(details._id)}> {star.includes(details._id) ? <StarIcon /> : <StarBorderIcon />}</Button>
+                                        <Table sx={{ marginLeft: { xs: "0px", sm: "80px", md: "100px" }, border: "1px solid black", display: "flex", alignItems: "center", justifyContent: "space-evenly", width: { xs: "100%", sm: "100%", md: "100%" }, cursor: "pointer", backgroundColor: "lightgray" }} >
+                                            <div style={{ display: "flex", alignItems: "center" }}>
+                                                <Checkbox sx={{ width: { xs: 5, sm: 10, md: 30 } }} size='small' onChange={() => {
+                                                    if (check.includes(details._id)) {
+                                                        setCheck(prev => prev.filter(ele => ele !== details._id))
+                                                    } else {
+                                                        setCheck(prev => [...prev, details._id])
+                                                    }
+                                                }} checked={check.includes(details._id)} />
+                                                <Button sx={{ marginLeft: { xs: 0, sm: 0, md: 0 }, width: { xs: 5, sm: 10, md: 30 } }} onClick={() => handleStar(details._id)}> {star.includes(details._id) ? <StarIcon /> : <StarBorderIcon />}</Button>
+                                            </div>
                                             <Box onClick={() => handleOpen(details)} sx={{
                                                 overflow: "hidden",
                                                 display: "flex", width: { xs: 100, sm: 200, md: 300, lg: 500 }
@@ -159,26 +161,28 @@ function DisplayMsg() {
                                                 <Typography sx={{
                                                     fontSize: { xs: 10, sm: 11, md: 15, lg: 17, },
                                                     fontWeight: 600,
-                                                    width: { xs: 130, sm: 100, md: 180 },
+                                                    width: { xs: 130, sm: 100, md: 120 },
                                                     textOverflow: "ellipsis",
+                                                    whiteSpace: "nowrap",
                                                     overflow: "hidden"
                                                 }}>{details.from}</Typography>
                                                 <Typography sx={{
                                                     marginLeft: "40px",
                                                     fontSize: { xs: 8, sm: 11, md: 15, lg: 17, },
                                                     fontWeight: "bold",
+                                                    whiteSpace: "nowrap",
                                                     width: { xs: 130, sm: 100, md: 180 },
-                                                    textOverflow: "ellipsis",
-                                                    overflow: "hidden"
+                                                    textOverflow: { xs: "ellipsis", sm: "ellipsis", md: "ellipsis" },
+                                                    overflow: { xs: "hidden", sm: "hidden", md: "hidden" },
                                                 }} id="subject">{details.subject}</Typography>
                                                 <Typography sx={{
                                                     fontSize: { xs: 8, sm: 11, md: 15, lg: 17 },
                                                     width: { xs: 130, sm: 100, md: 180 },
-                                                    textOverflow: "ellipsis",
-                                                    overflow: " hidden",
+                                                    textOverflow: { xs: "ellipsis", sm: "ellipsis", md: "ellipsis" },
+                                                    overflow: { xs: "hidden", sm: "hidden", md: "hidden" },
                                                 }} id="message">{details.message}</Typography>
                                             </Box>
-                                            <Button onClick={() => handleDelete(details)}><DeleteIcon color='inherit' /></Button>
+                                            <Button sx={{ width: { xs: 5, sm: 10, md: 30 } }} onClick={() => handleDelete(details)}><DeleteIcon color='inherit' /></Button>
                                         </Table>
                                     </Tooltip>
                                 </Box>
