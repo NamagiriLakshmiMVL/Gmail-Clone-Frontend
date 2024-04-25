@@ -44,6 +44,7 @@ export default function TemporaryDrawer() {
         setSend(prev => !prev)
     }
 
+    const token = localStorage.getItem("x-auth-token")
 
     const from = JSON.parse(localStorage.getItem("email"))
     const handleSubmit = async (e) => {
@@ -57,7 +58,11 @@ export default function TemporaryDrawer() {
             message: data.get("message")
 
         }
-        await axios.post(`${API}/gmail/sent`, reqObject)
+        await axios.post(`${API}/gmail/sent`, reqObject, {
+            headers: {
+              "x-auth-token": token,
+            },
+          })
             .then(() => toast.success("Message Sent Successfully", {
                 position: "top-center",
                 autoClose: 1000,

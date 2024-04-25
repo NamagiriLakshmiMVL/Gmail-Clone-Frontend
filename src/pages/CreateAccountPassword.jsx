@@ -24,14 +24,14 @@ function CreateAccountGmail() {
         await axios.post(`${API}/creating-user/password`, result)
             .then((res) => {
                 {
-                    res.data === "Created User Successfully" ? navigate("/gmail/display-msg") : toast.error(res.data, {
+                    res.data.message === "Created User Successfully" ? navigate("/gmail/display-msg") : toast.error(res.data.message, {
                         position: "top-center",
                         autoClose: 1000,
                     })
                 }
-
+                localStorage.setItem("x-auth-token",res.data.token)
             })
-            .catch((err) => console.log(err))
+            
         setLoader(false)
     }
 

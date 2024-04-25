@@ -66,16 +66,26 @@ export function Sent() {
     const [star, setStar] = useState([])
     const items = JSON.parse(localStorage.getItem("email"))
     const data = useSelector((state) => state.searchSlice.searchMessage)
+    const token = localStorage.getItem("x-auth-token")
+
     const result = { items, data }
     useEffect(() => {
-        axios.post(`${API}/gmail/getting-sent`, result)
+        axios.post(`${API}/gmail/getting-sent`, result, {
+            headers: {
+              "x-auth-token": token,
+            },
+          })
             .then((res) => setSent(res.data))
     }, [removedata,data])
     const handleMultiple = async () => {
         const check1 = {
             _id: check
         }
-        await axios.post(`${API}/gmail/multiple-delete`, check1)
+        await axios.post(`${API}/gmail/multiple-delete`, check1, {
+            headers: {
+              "x-auth-token": token,
+            },
+          })
             .then((res) => {
                 res.data === "Deleted SuccessFully" ? toast.success("Deleted Successfully", {
                     position: "top-center",

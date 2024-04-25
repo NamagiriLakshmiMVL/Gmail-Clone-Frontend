@@ -59,7 +59,6 @@ function CreatingAccountDob() {
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
                                     value={month}
-
                                     onChange={handleChange}
                                 >
                                     <MenuItem value={"January"}>January</MenuItem>
@@ -102,7 +101,7 @@ function CreatingAccountDob() {
                         </FormControl>
                     </Box>
                     <br />
-                    <Box sx={{ display: "flex",alignItems:"center", gap: "120px", marginLeft: { xs: "50px", sm: "300px", md: "500px" } }}>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: "120px", marginLeft: { xs: "50px", sm: "300px", md: "500px" } }}>
                         <Button sx={{ margin: "10px 0px" }} onClick={() => navigate("/creating-user/name")} variant="contained" type='submit'>Back</Button>
                         <Button sx={{ margin: "10px 0px" }} variant="contained" type='submit' >Next</Button>
                     </Box>

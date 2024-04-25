@@ -48,9 +48,9 @@ const style2 = {
 }
 export function Star() {
     const [sent, setSent] = useState([])
+    const token = localStorage.getItem("x-auth-token")
 
     const id = useSelector((state) => state.starSlice.starMessage)
-    console.log(id)
     const result = {
         id
     }
@@ -62,7 +62,11 @@ export function Star() {
         setModal(val)
     };
     useEffect(() => {
-        axios.post(`${API}/gmail/getting-star`, result)
+        axios.post(`${API}/gmail/getting-star`, result, {
+            headers: {
+              "x-auth-token": token,
+            },
+          })
             .then((res) => setSent(res.data))
     }, [])
     const handleDelete = (val) => {

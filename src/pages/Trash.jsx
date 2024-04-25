@@ -46,6 +46,7 @@ const style2 = {
 }
 export function Trash() {
     const [modal, setModal] = useState([])
+    const token = localStorage.getItem("x-auth-token")
 
     const handleClose = () => setOpen(false);
     const [open, setOpen] = useState(false);
@@ -58,7 +59,11 @@ export function Trash() {
     const [removedata, setRemovedata] = useState(false)
     const [check, setCheck] = useState([]);
     useEffect(() => {
-        axios.get(`${API}/info/getting-delete`)
+        axios.get(`${API}/info/getting-delete`, {
+            headers: {
+              "x-auth-token": token,
+            },
+          })
             .then((res) => setSent(res.data))
     }, [remove, removedata])
     const handleDelete = async (id) => {
@@ -66,7 +71,11 @@ export function Trash() {
             id
         }
 
-        await axios.post(`${API}/info/delete-delete`, newdata)
+        await axios.post(`${API}/info/delete-delete`, newdata, {
+            headers: {
+              "x-auth-token": token,
+            },
+          })
             .then((res) => toast.success(res.data, {
                 position: "top-center",
                 autoClose: 1000,
@@ -80,7 +89,11 @@ export function Trash() {
         const check1 = {
             _id: check
         }
-        await axios.post(`${API}/info/multiple-delete`, check1)
+        await axios.post(`${API}/info/multiple-delete`, check1, {
+            headers: {
+              "x-auth-token": token,
+            },
+          })
             .then((res) => {
                 res.data === "Deleted SuccessFully" ? toast.success("Deleted Successfully", {
                     position: "top-center",

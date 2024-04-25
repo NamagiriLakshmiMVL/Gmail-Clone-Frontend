@@ -26,7 +26,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: {xs:50,sm:800,md:800},
+    width: { xs: 50, sm: 800, md: 800 },
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -46,11 +46,11 @@ export default function SideBar() {
     };
     const handleClose = () => setOpen(false);
     const [open, setOpen] = useState(false);
+    const token = localStorage.getItem("x-auth-token")
 
     const from = JSON.parse(localStorage.getItem("email"))
     const handleSubmit = async (e) => {
         e.preventDefault()
-
         const data = new FormData(e.target)
         const reqObject = {
             from: data.get("from"),
@@ -59,13 +59,17 @@ export default function SideBar() {
             message: data.get("message")
 
         }
-        await axios.post(`${API}/gmail/sent`, reqObject)
-            .then(() => toast.success("Message Sent Successfully",{
-                position:"top-center",
+        await axios.post(`${API}/gmail/sent`, reqObject, {
+            headers: {
+              "x-auth-token": token,
+            },
+          })
+            .then(() => toast.success("Message Sent Successfully", {
+                position: "top-center",
                 autoClose: 1000,
             }))
-            .then(() => toast.info("Refresh to see new data",{
-                position:"top-center",
+            .then(() => toast.info("Refresh to see new data", {
+                position: "top-center",
                 autoClose: 2000,
             }))
             .then(() => setOpen(false))
@@ -117,9 +121,9 @@ export default function SideBar() {
                         <ListItem disablePadding>
 
                             <ListItemButton onClick={() => navigate("/info/getting-delete")} >
-                            <ListItemIcon>
-                                < DeleteOutlineIcon />
-                            </ListItemIcon>
+                                <ListItemIcon>
+                                    < DeleteOutlineIcon />
+                                </ListItemIcon>
                                 <ListItemText primary="Trash" />
                             </ListItemButton>
                         </ListItem>
@@ -140,7 +144,7 @@ export default function SideBar() {
                         </div>
                         <TextField required id="afrom" label="From" name='from' value={from} style={{ width: "100%" }} />
                         <br /><br />
-                        <TextField  required id="ato" label="To" name='to' style={{ width: "100%" }} />
+                        <TextField required id="ato" label="To" name='to' style={{ width: "100%" }} />
                         <br /><br />
                         <TextField required id='asubject' label="Subject" name='subject' style={{ width: "100%" }} />
                         <br /><br />

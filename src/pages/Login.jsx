@@ -22,14 +22,16 @@ function Login() {
         await axios.post(`${API}/creating-user/login`, result)
             .then((res) => {
                 {
-                    res.data === "Login Successfull" ? (toast.success("Login Successfull", {
+                    res.data.message === "Login Successfull" ? (toast.success("Login Successfull", {
                         position: "top-center",
                         autoClose: 1000,
-                    }) && navigate("/gmail/display-msg")) : toast.error(res.data, {
+                    }) && navigate("/gmail/display-msg")) : toast.error(res.data.message, {
                         position: "top-center",
                         autoClose: 1000,
                     })
                 }
+                localStorage.setItem("x-auth-token",res.data.token)
+
             })
             .catch((err) => alert(err))
         setLoader(false)

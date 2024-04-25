@@ -56,30 +56,32 @@ function DisplayMsg() {
     const [star, setStar] = useState([])
     const [modal, setModal] = useState([])
     const items = JSON.parse(localStorage.getItem('email'));
-    console.log("items", items)
     const [sample, setSample] = useState([])
     const data = useSelector((state) => state.searchSlice.searchMessage)
     const result = { items, data }
-    console.log(result)
-
-
-    console.log(data)
+    const token = localStorage.getItem("x-auth-token")
     useEffect(() => {
-
         console.log("useEffect fired");
-        axios.post(`${API}/gmail/getting-msg`, result)
+        axios.post(`${API}/gmail/getting-msg`, result, {
+            headers: {
+              "x-auth-token": token,
+            },
+          })
             .then((res) => {
                 setMessage(res.data)
 
             })
     }, [remove, removedata, data])
 
-
     const handleMultiple = async () => {
         const check1 = {
             _id: check
         }
-        await axios.post(`${API}/gmail/multiple-delete`, check1)
+        await axios.post(`${API}/gmail/multiple-delete`, check1, {
+            headers: {
+              "x-auth-token": token,
+            },
+          })
             .then((res) => {
                 res.data === "Deleted SuccessFully" ? toast.success("Deleted Successfully", {
                     position: "top-center",
@@ -100,13 +102,19 @@ function DisplayMsg() {
 
 
     const handleDelete = async (id) => {
-        const newdata = {
-            id
-        }
-        await axios.post(`${API}/info/delete`, id)
+        const newdata = { id }
+        await axios.post(`${API}/info/delete`, id, {
+            headers: {
+              "x-auth-token": token,
+            },
+          })
             .then((res) => console.log(res.data))
 
-        await axios.post(`${API}/gmail/deleting-msg`, newdata)
+        await axios.post(`${API}/gmail/deleting-msg`, newdata, {
+            headers: {
+              "x-auth-token": token,
+            },
+          })
             .then((res) => toast.success(res.data, {
                 position: "top-center",
                 autoClose: 1000,
